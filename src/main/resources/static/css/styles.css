@@ -1,0 +1,49 @@
+body {
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    height: 100vh;
+}
+
+/* Estilo de la tarjeta */
+.login-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.login-card:hover {
+    transform: scale(1.02);
+}
+
+/* Estilo del botón */
+.btn-primary {
+    background: #ff7b00;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #e66a00;
+}
+
+/* Campos de entrada */
+.form-control {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+/* Texto blanco */
+label, h3 {
+    color: white;
+}
