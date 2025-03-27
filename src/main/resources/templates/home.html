@@ -1,45 +1,105 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eventos Gaming</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - Torneo Retro Gamer 2025</title>
+    <!-- Fuentes: Retro para títulos y Roboto para el contenido -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/styles.css" />
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body>
+<!-- Checkbox oculto para activar modo 8-bit -->
+<input type="checkbox" id="mode8bit" class="mode8bit-toggle" />
+<div id="page">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="/"><span class="icon">🎮</span> Inicio</a></li>
+            <li><a href="/torneo"><span class="icon">🏆</span> Torneos</a></li>
+            <li><a href="/login"><span class="icon">🔑</span> Iniciar Sesión</a></li>
+            <li><a href="/registro"><span class="icon">✍️</span> Registrarse</a></li>
+            <li><label for="mode8bit" class="toggle-8bit">🕹️ Modo 8 bits</label></li>
+        </ul>
+    </nav>
 
-<!-- Navbar Responsivo -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="/">Eventos Gaming</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="/login">Iniciar Sesión</a></li>
-                <li class="nav-item"><a class="nav-link" href="/eventos">Eventos</a></li>
-                <li class="nav-item"><a class="nav-link" href="/contacto">Contacto</a></li>
-            </ul>
+    <!-- Sección Inicio / Hero -->
+    <section id="inicio">
+        <h1 class="glitch" data-text="Torneo Retro Gamer 2025">Torneo Retro Gamer 2025</h1>
+        <p>Bienvenido al portal de torneos más épico. ¡Compite, gana y haz historia en el mundo retro!</p>
+    </section>
+
+    <!-- Sección Torneos -->
+    <section id="torneos-home">
+        <h2>Torneo en Curso</h2>
+        <div class="tournament-bracket">
+            <!-- Ronda 1 -->
+            <div class="round round1">
+                <div class="match"><span class="team">Jugador 1</span> <span class="score">3</span></div>
+                <div class="match"><span class="team">Jugador 2</span> <span class="score">5</span></div>
+                <div class="match"><span class="team">Jugador 3</span> <span class="score">2</span></div>
+                <div class="match"><span class="team">Jugador 4</span> <span class="score">4</span></div>
+            </div>
+            <!-- Ronda 2 -->
+            <div class="round round2">
+                <div class="match"><span class="team">Jugador 2</span> <span class="score">7</span></div>
+                <div class="match"><span class="team">Jugador 4</span> <span class="score">6</span></div>
+            </div>
+            <!-- Final -->
+            <div class="round final">
+                <div class="match"><span class="team">Jugador 2</span> <span class="score">10</span></div>
+            </div>
+            <!-- Campeón -->
+            <div class="champion">🏆 Ganador: <span class="winner">Jugador 2</span></div>
         </div>
-    </div>
-</nav>
 
-<!-- Contenido Principal -->
-<main class="flex-grow-1 d-flex align-items-center justify-content-center text-center bg-light">
-    <div class="container">
-        <h2>Descubre los mejores eventos de gaming</h2>
-        <p>Conéctate con la comunidad, participa en torneos y mantente actualizado.</p>
-        <a href="/eventos" class="btn btn-primary">Ver Eventos</a>
-    </div>
-</main>
+        <!-- Registro de Torneos (opcional en Home) -->
+        <h3>¿Quieres registrar un torneo?</h3>
+        <div class="forms-container">
+            <div class="form-card">
+                <form id="tournament-form">
+                    <div class="form-group">
+                        <label for="tournament-name">Nombre del Torneo:</label>
+                        <input type="text" id="tournament-name" name="tournament-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tournament-date">Fecha:</label>
+                        <input type="date" id="tournament-date" name="tournament-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tournament-description">Descripción:</label>
+                        <textarea id="tournament-description" name="tournament-description" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="form-button">Registrar Torneo</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-<!-- Footer -->
-<footer class="bg-dark text-white text-center py-3 mt-auto">
-    <p>&copy; 2025 Eventos Gaming. Todos los derechos reservados.</p>
-</footer>
+    <!-- Sección Noticias / Carrusel de citas -->
+    <section id="noticias">
+        <h2>Noticias</h2>
+        <div class="carousel">
+            <blockquote>"La mejor página de torneos de la historia" <cite>&mdash; The New York Times</cite></blockquote>
+            <blockquote>"Increíble experiencia visual y competitiva" <cite>&mdash; eSports Magazine</cite></blockquote>
+            <blockquote>"Un nuevo estándar para las páginas de videojuegos" <cite>&mdash; Game Review Weekly</cite></blockquote>
+        </div>
+    </section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Sección Patrocinadores -->
+    <section id="patrocinadores">
+        <h2>Patrocinadores</h2>
+        <div class="sponsors">
+            <div class="sponsor"><span class="emoji">⚡</span> Mana Energy Drink</div>
+            <div class="sponsor"><span class="emoji">🏦</span> Pixel Bank</div>
+            <div class="sponsor"><span class="emoji">🛡️</span> GG Insurance</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Retro Gamer Tournament. Todos los derechos reservados.</p>
+    </footer>
+</div>
 </body>
 </html>

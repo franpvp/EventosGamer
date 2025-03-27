@@ -1,67 +1,96 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar Sesión - Torneo Retro Gamer 2025</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-LtrjvnR4/J57+Cuom1Jfa2ZxFazJZAGPZVfW9L3R05T2D/c7yjhp+F9JB9N3duJ0"
+          crossorigin="anonymous">
+    <!-- Fuentes: Retro para títulos y Roboto para el contenido -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+        /* Centrado del título de la sección de Iniciar Sesión */
+        #iniciar-sesion h2 {
+          text-align: center;
+          margin: 0 auto;
+        }
+        .forms-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          min-width: 60vh;
+        }
+        .form-card {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 100%;
+        }
+    </style>
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body>
+<!-- Checkbox oculto para activar modo 8-bit -->
+<input type="checkbox" id="mode8bit" class="mode8bit-toggle" />
+<div id="page">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="/"><span class="icon">🎮</span> Inicio</a></li>
+            <li><a href="/torneo"><span class="icon">🏆</span> Torneos</a></li>
+            <li><a href="/login"><span class="icon">🔑</span> Iniciar Sesión</a></li>
+            <li><a href="/registro"><span class="icon">✍️</span> Registrarse</a></li>
+            <li><label for="mode8bit" class="toggle-8bit">🕹️ Modo 8 bits</label></li>
+        </ul>
+    </nav>
 
-<!-- Navbar Responsivo -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="/">Eventos Gaming</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="/login">Iniciar Sesión</a></li>
-                <li class="nav-item"><a class="nav-link" href="/eventos">Eventos</a></li>
-                <li class="nav-item"><a class="nav-link" href="/contacto">Contacto</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<!-- Contenido Principal: Login centrado -->
-<main class="flex-grow-1 d-flex justify-content-center align-items-center">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-sm-10 col-md-8 col-lg-6">
-                <div class="card login-card p-4">
-                    <div class="card-header text-center border-0">
-                        <h3>Iniciar Sesión</h3>
-                    </div>
-                    <div class="card-body">
-                        <form th:action="@{/login}" method="post">
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Usuario</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Ingresa tu usuario" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100 py-2">Ingresar</button>
-                        </form>
-                        <div class="text-center mt-3">
-                            <a href="#" class="text-white">¿Olvidaste tu contraseña?</a>
+    <!-- Sección de Iniciar Sesión -->
+    <section id="iniciar-sesion" class="mt-4">
+        <h2 class="text-center">Iniciar Sesión</h2>
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- El formulario ocupa 8 columnas en pantallas medianas y superiores -->
+                <div class="col-12 col-md-8">
+                    <div class="forms-container">
+                        <div class="form-card p-4">
+                            <form id="login-form">
+                                <div class="form-group">
+                                    <label for="login-email">Correo Electrónico:</label>
+                                    <input type="email" id="login-email" name="email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="login-password">Contraseña:</label>
+                                    <input type="password" id="login-password" name="password" class="form-control" required>
+                                </div>
+                                <button type="submit" class="form-button btn btn-primary btn-block">Entrar</button>
+                                <!-- Sección adicional: enlace para recuperar contraseña y botón para crear cuenta nueva -->
+                                <div class="d-flex justify-content-between mt-3">
+                                    <a href="/recuperar-contraseña" class="small">¿Olvidaste tu contraseña?</a>
+                                    <a href="/registro" class="btn btn-secondary btn-sm">Crear cuenta nueva</a>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
+    </section>
 
-<!-- Footer -->
-<footer class="bg-dark text-white text-center py-3 mt-auto">
-    <p>&copy; 2025 Eventos Gaming. Todos los derechos reservados.</p>
-</footer>
+    <!-- Footer -->
+    <footer class="text-center mt-4">
+        <p>&copy; 2025 Retro Gamer Tournament. Todos los derechos reservados.</p>
+    </footer>
+</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS y dependencias (opcional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-LtrjvnR4/J57+Cuom1Jfa2ZxFazJZAGPZVfW9L3R05T2D/c7yjhp+F9JB9N3duJ0"
+        crossorigin="anonymous"></script>
 </body>
 </html>

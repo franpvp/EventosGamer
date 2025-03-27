@@ -20,7 +20,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home", "/login", "/registro", "/eventos", "/contacto").permitAll()
+                        .requestMatchers("/", "/home", "/login", "/registro", "/contacto", "/recuperar-contrasena", "/torneo").permitAll()
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Asegura archivos estáticos
                         .anyRequest().authenticated()
                 )
