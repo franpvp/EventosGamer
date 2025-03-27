@@ -30,6 +30,7 @@ public class UsuarioDTO {
     @Size(min = 2, max = 20, message = "El campo password debe tener entre 2 y 20 caracteres")
     private String password;
 
+    @NotNull(message = "El campo email no puede estar vacío")
     private String email;
 
     @NotNull(message = "El campo nombre no puede estar vacío")
@@ -54,5 +55,5 @@ public class UsuarioDTO {
     private boolean isLoggedIn;
 
     @NotNull(message = "El campo fechaCreacion no puede estar vacío")
-    private String fechaCreacion;
+    private LocalDate fechaCreacion;
 }

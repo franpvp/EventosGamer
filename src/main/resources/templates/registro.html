@@ -7,10 +7,62 @@
     <!-- Fuentes: Retro para títulos y Roboto para el contenido -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/js/index.js" />
     <style>
         #registrarse h2 {
           text-align: center;
           margin: 0 auto;
+        }
+        .forms-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+        }
+        .form-card {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 100%;
+          max-width: 500px;
+          margin: 0 auto;
+          padding: 20px;
+          border: 1px solid #333;
+          border-radius: 8px;
+          background: #222;
+          color: #fff;
+        }
+        .form-group {
+          margin-bottom: 15px;
+        }
+        .form-group label {
+          display: block;
+          margin-bottom: 5px;
+          font-family: 'Press Start 2P', cursive;
+          font-size: 0.9em;
+        }
+        .form-group input {
+          width: 100%;
+          padding: 8px;
+          border: 1px solid #555;
+          border-radius: 4px;
+          background: #333;
+          color: #fff;
+        }
+        .form-button {
+          width: 100%;
+          padding: 10px;
+          background: linear-gradient(45deg, #0ff, #ff0);
+          border: none;
+          font-family: 'Press Start 2P', cursive;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: transform 0.2s, box-shadow 0.2s;
+          color: #000;
+        }
+        .form-button:hover {
+          transform: scale(1.05);
+          box-shadow: 0 0 10px #0ff;
         }
     </style>
 </head>
@@ -36,17 +88,34 @@
             <div class="form-card">
                 <form id="register-form">
                     <div class="form-group">
-                        <label for="register-name">Nombre:</label>
-                        <input type="text" id="register-name" name="name" required>
+                        <label for="register-username">Username:</label>
+                        <input type="text" id="register-username" name="username" required>
                     </div>
                     <div class="form-group">
                         <label for="register-email">Correo Electrónico:</label>
                         <input type="email" id="register-email" name="email" required>
                     </div>
                     <div class="form-group">
+                        <label for="register-nombre">Nombre:</label>
+                        <input type="text" id="register-nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-apellidoPaterno">Apellido Paterno:</label>
+                        <input type="text" id="register-apellidoPaterno" name="apellidoPaterno" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-apellidoMaterno">Apellido Materno:</label>
+                        <input type="text" id="register-apellidoMaterno" name="apellidoMaterno" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-fechaNacimiento">Fecha de Nacimiento:</label>
+                        <input type="date" id="register-fechaNacimiento" name="fechaNacimiento" required>
+                    </div>
+                    <div class="form-group">
                         <label for="register-password">Contraseña:</label>
                         <input type="password" id="register-password" name="password" required>
                     </div>
+                    <!-- Los campos role, isLoggedIn y fechaCreacion se asignan automáticamente -->
                     <button type="submit" class="form-button">Registrarse</button>
                 </form>
             </div>
@@ -58,5 +127,6 @@
         <p>&copy; 2025 Retro Gamer Tournament. Todos los derechos reservados.</p>
     </footer>
 </div>
+
 </body>
 </html>

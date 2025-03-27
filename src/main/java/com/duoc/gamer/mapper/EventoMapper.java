@@ -2,7 +2,9 @@ package com.duoc.gamer.mapper;
 
 import com.duoc.gamer.dto.EventoDTO;
 import com.duoc.gamer.entities.EventoEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EventoMapper {
 
     public EventoDTO eventoEntityToDto(EventoEntity eventoEntity) {

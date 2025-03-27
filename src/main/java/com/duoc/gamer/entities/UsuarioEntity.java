@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
+@Table(name = "usuarios")
 public class UsuarioEntity {
 
     @Id
@@ -26,7 +27,7 @@ public class UsuarioEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "password")
+    @Column(name = "email")
     private String email;
 
     @Column(name = "nombre")
@@ -44,11 +45,10 @@ public class UsuarioEntity {
     @Column(name = "role")
     private UserRole role;
 
-    @Column(name = "isLoggedIn")
+    @Column(name = "is_logged_in")
     private boolean isLoggedIn;
 
-    @Column(name = "fechaCreacion")
-    private String fechaCreacion;
-
+    @Column(name = "fecha_creacion")
+    private LocalDate fechaCreacion;
 
 }
