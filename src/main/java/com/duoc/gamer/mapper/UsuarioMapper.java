@@ -2,6 +2,7 @@ package com.duoc.gamer.mapper;
 
 import com.duoc.gamer.dto.UsuarioDTO;
 import com.duoc.gamer.entities.UsuarioEntity;
+import com.duoc.gamer.enums.UserRole;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,6 +17,7 @@ public class UsuarioMapper {
                 .role(usuarioEntity.getRole())
                 .nombre(usuarioEntity.getNombre())
                 .apellidoPaterno(usuarioEntity.getApellidoPaterno())
+                .apellidoMaterno(usuarioEntity.getApellidoMaterno())
                 .fechaNacimiento(usuarioEntity.getFechaNacimiento())
                 .isLoggedIn(usuarioEntity.isLoggedIn())
                 .fechaCreacion(usuarioEntity.getFechaCreacion())
@@ -30,9 +32,11 @@ public class UsuarioMapper {
                 .role(usuarioDTO.getRole())
                 .nombre(usuarioDTO.getNombre())
                 .apellidoPaterno(usuarioDTO.getApellidoPaterno())
+                .apellidoMaterno(usuarioDTO.getApellidoMaterno())
                 .fechaNacimiento(usuarioDTO.getFechaNacimiento())
                 .isLoggedIn(usuarioDTO.isLoggedIn())
                 .fechaCreacion(usuarioDTO.getFechaCreacion())
+                .role(UserRole.USER)
                 .build();
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,59 +10,59 @@
     <link rel="stylesheet" href="/js/index.js" />
     <style>
         #registrarse h2 {
-          text-align: center;
-          margin: 0 auto;
+            text-align: center;
+            margin: 0 auto;
         }
         .forms-container {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
         }
         .form-card {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          width: 100%;
-          max-width: 500px;
-          margin: 0 auto;
-          padding: 20px;
-          border: 1px solid #333;
-          border-radius: 8px;
-          background: #222;
-          color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: #222;
+            color: #fff;
         }
         .form-group {
-          margin-bottom: 15px;
+            margin-bottom: 15px;
         }
         .form-group label {
-          display: block;
-          margin-bottom: 5px;
-          font-family: 'Press Start 2P', cursive;
-          font-size: 0.9em;
+            display: block;
+            margin-bottom: 5px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.9em;
         }
         .form-group input {
-          width: 100%;
-          padding: 8px;
-          border: 1px solid #555;
-          border-radius: 4px;
-          background: #333;
-          color: #fff;
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background: #333;
+            color: #fff;
         }
         .form-button {
-          width: 100%;
-          padding: 10px;
-          background: linear-gradient(45deg, #0ff, #ff0);
-          border: none;
-          font-family: 'Press Start 2P', cursive;
-          text-transform: uppercase;
-          cursor: pointer;
-          transition: transform 0.2s, box-shadow 0.2s;
-          color: #000;
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(45deg, #0ff, #ff0);
+            border: none;
+            font-family: 'Press Start 2P', cursive;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            color: #000;
         }
         .form-button:hover {
-          transform: scale(1.05);
-          box-shadow: 0 0 10px #0ff;
+            transform: scale(1.05);
+            box-shadow: 0 0 10px #0ff;
         }
     </style>
 </head>
@@ -86,36 +86,36 @@
         <h2>Registrarse</h2>
         <div class="forms-container">
             <div class="form-card">
-                <form id="register-form">
+                <form th:action="@{/registro}" th:object="${usuario}" method="post" id="register-form">
                     <div class="form-group">
                         <label for="register-username">Username:</label>
-                        <input type="text" id="register-username" name="username" required>
+                        <input type="text" id="register-username" th:field="*{username}" required>
                     </div>
                     <div class="form-group">
                         <label for="register-email">Correo Electrónico:</label>
-                        <input type="email" id="register-email" name="email" required>
+                        <input type="email" id="register-email" th:field="*{email}" required>
                     </div>
                     <div class="form-group">
                         <label for="register-nombre">Nombre:</label>
-                        <input type="text" id="register-nombre" name="nombre" required>
+                        <input type="text" id="register-nombre" th:field="*{nombre}" required>
                     </div>
                     <div class="form-group">
                         <label for="register-apellidoPaterno">Apellido Paterno:</label>
-                        <input type="text" id="register-apellidoPaterno" name="apellidoPaterno" required>
+                        <input type="text" id="register-apellidoPaterno" th:field="*{apellidoPaterno}" required>
                     </div>
                     <div class="form-group">
                         <label for="register-apellidoMaterno">Apellido Materno:</label>
-                        <input type="text" id="register-apellidoMaterno" name="apellidoMaterno" required>
+                        <input type="text" id="register-apellidoMaterno" th:field="*{apellidoMaterno}" required>
                     </div>
                     <div class="form-group">
                         <label for="register-fechaNacimiento">Fecha de Nacimiento:</label>
-                        <input type="date" id="register-fechaNacimiento" name="fechaNacimiento" required>
+                        <input type="date" id="register-fechaNacimiento" th:field="*{fechaNacimiento}" required>
                     </div>
                     <div class="form-group">
                         <label for="register-password">Contraseña:</label>
-                        <input type="password" id="register-password" name="password" required>
+                        <input type="password" id="register-password" th:field="*{password}" required>
                     </div>
-                    <!-- Los campos role, isLoggedIn y fechaCreacion se asignan automáticamente -->
+                    <!-- Los campos role, isLoggedIn y fechaCreacion se asignan automáticamente en el backend -->
                     <button type="submit" class="form-button">Registrarse</button>
                 </form>
             </div>
