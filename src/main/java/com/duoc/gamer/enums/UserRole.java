@@ -1,5 +1,5 @@
 package com.duoc.gamer.enums;
 
 public enum UserRole {
-    ADMIN, MODERATOR ,VIEWER, USER
+    ROLE_ADMIN, MODERATOR, VIEWER, ROLE_USER
 }

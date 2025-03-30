@@ -49,9 +49,4 @@ public class UsuarioDTO {
     @NotNull(message = "El campo role no puede estar vacío")
     private UserRole role;
 
-    @NotNull(message = "El campo isLoggedIn no puede estar vacío")
-    private boolean isLoggedIn;
-
-    @NotNull(message = "El campo fechaCreacion no puede estar vacío")
-    private LocalDate fechaCreacion;
 }

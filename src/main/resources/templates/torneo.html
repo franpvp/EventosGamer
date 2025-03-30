@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Participa en Eventos - Torneo Retro Gamer 2025</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-9ndCyUa6mY5y+NMBdF1H8aC0W+gUpbQo6KqXRqqTj6M8eT2VFxVfCUy6N1+2P9Q+"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
           crossorigin="anonymous">
     <!-- Fuentes y estilos adicionales -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap"
-          rel="stylesheet">
+          rel="stylesheet"/>
     <link rel="stylesheet" href="/css/styles.css">
     <style>
         #eventos-participacion h2 {
@@ -18,66 +18,84 @@
           margin: 0 auto;
           margin-top: 30px;
         }
-        .card-img-container {
-          display: flex;
-          width: auto;  /* ancho fijo en píxeles */
-          overflow: hidden;
-          margin: 0 auto; /* centra el contenedor dentro del card */
-          margin-bottom: 30px;
-          justify-content: center;
-          text-align: center;
-        }
         .card-img-container img {
-          width: 1000px;  /* ancho fijo */
-          height: 500px;  /* altura fija */
-          object-fit: cover;
-        }
-        .participar-btn {
-          display: flex;
-          background: linear-gradient(45deg, #0ff, #ff0);
-          border: none;
-          color: #000;
-          font-family: 'Press Start 2P', cursive;
-          text-transform: uppercase;
-          transition: transform 0.2s, box-shadow 0.2s;
-          justify-content: center !important;
-          margin-top: 20px;
-          margin-bottom: 50px;
-          border-radius: 30px;
-        }
-        .participar-btn:hover {
-          transform: scale(1.02);
-          box-shadow: 0 0 10px #0ff;
-        }
-        /* Centrar horizontalmente el contenido de los list-group items */
-        .list-group-item {
-          text-align: center !important;
-          border: 1px solid #dee2e6; /* Ejemplo para ver el borde */
-        }
-        .card-body div,
-        .card-body p {
-          text-align: center;
-        }
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      object-fit: cover;
+    }
+    .participar-btn {
+      background: linear-gradient(45deg, #0ff, #ff0);
+      border: none;
+      color: #000;
+      font-family: 'Press Start 2P', cursive;
+      text-transform: uppercase;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-radius: 30px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      /* El botón se centra gracias a d-block y mx-auto */
+    }
+    .participar-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 10px #0ff;
+    }
+    /* Centrar el contenido de la lista y los textos del card */
+    .list-group-item {
+      text-align: center;
+      border: 1px solid #dee2e6;
+    }
+    .card-body h5,
+    .card-body p,
+    .card-body div {
+      text-align: center;
+    }
+    ul.list-group.list-group-flush {
+      list-style: none;
+      padding-left: 0;
+    }
+    .card-title {
+      font-family: 'Press Start 2P', cursive;
+    }
 
-        .card-body div {
-            font-size: 30px;
-            margin-bottom: 15px;
-        }
-        ul.list-group.list-group-flush {
-          list-style: none;
-          padding-left: 0;
-        }
     </style>
 </head>
 <body>
 
-<nav class="navbar">
-    <ul>
-        <li><a href="/"><span class="icon">🎮</span> Inicio</a></li>
-        <li><a href="/torneo"><span class="icon">🏆</span> Torneos</a></li>
-        <li><a href="/login"><span class="icon">🔑</span> Iniciar Sesión</a></li>
-        <li><a href="/registro"><span class="icon">✍️</span> Registrarse</a></li>
-    </ul>
+
+<nav class="navbar bg-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">Retro Gamer</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+             aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/torneo}">Torneos</a>
+                    </li>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/perfil}">Perfil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/logout}">Cerrar Sesión</a>
+                        </li>
+                    </th:block>
+                </ul>
+            </div>
+        </div>
+    </div>
 </nav>
 <div class="container mt-4">
     <section id="eventos-participacion" class="mb-4">
@@ -85,15 +103,14 @@
         <!-- Grid responsivo: 1 columna en dispositivos pequeños y 3 columnas en dispositivos medianos en adelante -->
         <div class="row">
             <!-- Card Evento 1 -->
-            <div class="col-8">
-                <div class="card text-center mb-3">
+            <div class="col-12 col-md-8 mx-auto mb-4">
+                <div class="card text-center">
                     <div class="card-img-container">
-                        <img src="/images/evento-fornite.jpg" alt="Evento Retro 1">
+                        <img src="/images/evento-fornite.jpg" alt="Evento Retro 1" class="img-fluid">
                     </div>
-                    <div class="card-body text-center">
-                        <div class="card-title text-center">Evento Fornite</div>
-                        <p class="card-text text-center">Compite en este evento clásico y demuestra tus habilidades en
-                            juegos
+                    <div class="card-body">
+                        <h5 class="card-title">Evento Fornite</h5>
+                        <p class="card-text">Compite en este evento clásico y demuestra tus habilidades en juegos
                             retro.</p>
                         <!-- Lista de detalles del evento -->
                         <ul class="list-group list-group-flush">
@@ -109,21 +126,21 @@
                             <li class="list-group-item"><strong>Premios:</strong> Trofeo, Medalla y mucho más.</li>
                         </ul>
                     </div>
-                    <div class="card-footer text-center">
-                        <a href="/participar/evento1" class="btn participar-btn mb-2">Participar</a>
+                    <div class="card-footer">
+                        <a href="/participar/evento1" class="btn participar-btn d-block mx-auto">Participar</a>
                     </div>
                 </div>
             </div>
             <!-- Card Evento 2 -->
-            <div class="col-8">
-                <div class="card h-100">
+            <div class="col-12 col-md-8 mx-auto mb-4">
+                <div class="card text-center">
                     <div class="card-img-container">
-                        <img src="/images/marvel-rivals-evento.png" alt="Evento Retro 2">
+                        <img src="/images/marvel-rivals-evento.png" alt="Evento Retro 2" class="img-fluid">
                     </div>
                     <div class="card-body">
-                        <div class="card-title">Evento Retro 2</div>
+                        <h5 class="card-title">Evento Rivals</h5>
                         <p class="card-text">Pon a prueba tu destreza en competencias llenas de nostalgia y premios.</p>
-                        <ul class="list-group list-group-flush mt-3">
+                        <ul class="list-group list-group-flush">
                             <li class="list-group-item"><strong>Categoría:</strong> Competitivo</li>
                             <li class="list-group-item"><strong>Fecha y Hora:</strong> 05/04/2025, 20:00</li>
                             <li class="list-group-item"><strong>Ubicación:</strong> Auditorio Central, Ciudad ABC</li>
@@ -137,22 +154,22 @@
                             <li class="list-group-item"><strong>Premios:</strong> Cupón, Trofeo y Reconocimientos.</li>
                         </ul>
                     </div>
-                    <div class="card-footer text-center">
-                        <a href="/participar/evento2" class="btn participar-btn w-100 mb-2">Participar</a>
+                    <div class="card-footer">
+                        <a href="/participar/evento2" class="btn participar-btn d-block mx-auto">Participar</a>
                     </div>
                 </div>
             </div>
             <!-- Card Evento 3 -->
-            <div class="col-8">
-                <div class="card">
+            <div class="col-12 col-md-8 mx-auto mb-4">
+                <div class="card text-center">
                     <div class="card-img-container">
-                        <img src="/images/overwatch2.jpg" alt="Overwatch 2">
+                        <img src="/images/overwatch2.jpg" alt="Overwatch 2" class="img-fluid">
                     </div>
-                    <div class="card-body text-center">
-                        <div class="card-title">Overwatch 2</div>
-                        <p class="card-text mb-4">Sumérgete en una experiencia única y retro, y compite por increíbles
+                    <div class="card-body">
+                        <h5 class="card-title">Overwatch 2</h5>
+                        <p class="card-text">Sumérgete en una experiencia única y retro, y compite por increíbles
                             premios.</p>
-                        <ul class="list-group list-group-flush mt-3">
+                        <ul class="list-group list-group-flush">
                             <li class="list-group-item"><strong>Categoría:</strong> Estrategia</li>
                             <li class="list-group-item"><strong>Fecha y Hora:</strong> 12/04/2025, 19:00</li>
                             <li class="list-group-item"><strong>Ubicación:</strong> Centro de Exposiciones, Ciudad LMN
@@ -168,8 +185,8 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="d-flex card-footer justify-content-center">
-                        <a href="/participar/evento3" class="btn participar-btn w-100 mb-2">Participar</a>
+                    <div class="card-footer">
+                        <a href="/participar/evento3" class="btn participar-btn d-block mx-auto">Participar</a>
                     </div>
                 </div>
             </div>
@@ -180,7 +197,7 @@
 
 <!-- Bootstrap 5 JS Bundle (incluye Popper) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-QF1DI4m1ALxGFEh+z0kD25YDeV+0QFf4IvqVgjv95E18jUj07W1xM9eRp7UeNAb+"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
 </body>
 </html>

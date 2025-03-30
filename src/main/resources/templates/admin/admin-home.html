@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Retro Gamer Tournament</title>
+    <!-- Fuentes: Retro para títulos y Roboto para el contenido -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        /* Estilos generales */
+        body {
+          background: #000;
+          color: #fff;
+          font-family: 'Roboto', sans-serif;
+        }
+        h1, h2, h3 {
+          font-family: 'Press Start 2P', cursive;
+        }
+        /* Navbar retro */
+        .navbar {
+          background-color: #222;
+          padding: 1rem;
+        }
+        .navbar ul {
+          list-style: none;
+          display: flex;
+          justify-content: center;
+          margin: 0;
+          padding: 0;
+        }
+        .navbar li {
+          margin: 0 15px;
+        }
+        .navbar a {
+          text-decoration: none;
+          color: #fff;
+          font-family: 'Press Start 2P', cursive;
+        }
+        /* Sección Hero */
+        #inicio {
+          text-align: center;
+          margin: 40px auto;
+          padding: 20px;
+        }
+        #inicio h1 {
+          font-size: 2.5rem;
+          margin-bottom: 20px;
+        }
+        #inicio p {
+          font-size: 1.2rem;
+        }
+        /* Secciones generales */
+        .section {
+          padding: 40px 0;
+        }
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+        /* Tarjetas de acciones */
+        .card {
+          background: #111;
+          border: 2px solid #333;
+          border-radius: 8px;
+          margin: 20px 0;
+          padding: 20px;
+          text-align: center;
+        }
+        .card h3 {
+          margin-bottom: 15px;
+        }
+        .card p {
+          margin-bottom: 20px;
+        }
+        /* Botón retro */
+        .btn {
+          background: linear-gradient(45deg, #0ff, #ff0);
+          border: none;
+          padding: 10px 20px;
+          font-family: 'Press Start 2P', cursive;
+          text-transform: uppercase;
+          color: #000;
+          text-decoration: none;
+          transition: transform 0.2s, box-shadow 0.2s;
+          border-radius: 8px;
+          display: inline-block;
+          margin-top: 10px;
+        }
+        .btn:hover {
+          transform: scale(1.05);
+          box-shadow: 0 0 10px #0ff;
+        }
+        /* Footer */
+        footer {
+          text-align: center;
+          padding: 20px;
+          background: #222;
+          color: #fff;
+          font-family: 'Press Start 2P', cursive;
+        }
+    </style>
+</head>
+<body>
+<!-- Checkbox oculto para activar modo 8-bit -->
+<input type="checkbox" id="mode8bit" class="mode8bit-toggle"/>
+<div id="page">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul>
+            <li><a th:href="@{/admin}">Inicio</a></li>
+            <li><a th:href="@{/admin/usuarios}">Gestión de Usuarios</a></li>
+            <li><a th:href="@{/admin/eventos}">Gestión de Eventos</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección Inicio / Hero -->
+    <section id="inicio" class="section">
+        <h1>Panel de Administración</h1>
+        <p>Bienvenido al panel de administración de Retro Gamer Tournament. Administra usuarios y eventos con estilo
+            retro.</p>
+    </section>
+
+    <!-- Sección Acciones Rápidas -->
+    <section id="acciones" class="section">
+        <div class="container">
+            <h2 class="text-center">Acciones Rápidas</h2>
+            <div class="row">
+                <!-- Card Gestión de Usuarios -->
+                <div class="col-12 col-md-6">
+                    <div class="card">
+                        <h3>Gestión de Usuarios</h3>
+                        <p>Administra y revisa todos los usuarios registrados.</p>
+                        <a th:href="@{/admin/usuarios}" class="btn">Ir a Usuarios</a>
+                    </div>
+                </div>
+                <!-- Card Gestión de Eventos -->
+                <div class="col-12 col-md-6">
+                    <div class="card">
+                        <h3>Gestión de Eventos</h3>
+                        <p>Administra los eventos y torneos programados.</p>
+                        <a th:href="@{/admin/eventos}" class="btn">Ir a Eventos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Actualizaciones / Noticias -->
+    <section id="actualizaciones" class="section">
+        <div class="container">
+            <h2 class="text-center">Actualizaciones Recientes</h2>
+            <div class="card">
+                <h3>Actualización de Usuarios</h3>
+                <p>Se han actualizado los datos de varios usuarios.</p>
+            </div>
+            <div class="card">
+                <h3>Nuevos Eventos</h3>
+                <p>Se han agregado nuevos eventos a la plataforma.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Retro Gamer Tournament. Todos los derechos reservados.</p>
+    </footer>
+</div>
+</body>
+</html>

@@ -35,23 +35,24 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/", "/home", "/login", "/contacto", "/registro", "/favicon.ico",
-                                "/css/**", "/js/**", "/images/**", "/authenticate").permitAll()
-                        .requestMatchers("/torneo").authenticated()
+                                "/css/**", "/js/**", "/images/**", "/authenticate", "/admin-home").permitAll()
+                        .requestMatchers("/torneo", "/perfil").authenticated()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 )
+
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         // Primero agregamos nuestro filtro para trasladar la cookie al header
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(new JwtCookieToHeaderFilter(), JwtRequestFilter.class);
         // Luego el filtro de validación JWT
-        
+
         return http.build();
     }
 

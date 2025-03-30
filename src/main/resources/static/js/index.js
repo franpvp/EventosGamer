@@ -11,9 +11,6 @@ document.getElementById("register-form").addEventListener("submit", function(e) 
 
       // Valores por defecto
       const role = "USER"; // Se asigna por defecto el rol "USER"
-      const isLoggedIn = false;
-      // La fecha de creación se establece a la fecha actual (formato yyyy-MM-dd)
-      const fechaCreacion = new Date().toISOString().split('T')[0];
 
       // Crear objeto usuario con todos los campos requeridos por la entidad
       const usuario = {
@@ -24,9 +21,7 @@ document.getElementById("register-form").addEventListener("submit", function(e) 
         apellidoPaterno,
         apellidoMaterno,
         fechaNacimiento,
-        role,
-        isLoggedIn,
-        fechaCreacion
+        role
       };
 
       // Realizar solicitud POST al endpoint de tu REST controller

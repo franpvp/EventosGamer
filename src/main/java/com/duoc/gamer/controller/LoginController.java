@@ -59,7 +59,13 @@ public class LoginController {
         cookie.setMaxAge(24 * 60 * 60); // Expiración: 1 día
         response.addCookie(cookie);
 
-        // Redirigir a la página de inicio o a la ruta protegida deseada
-        return "redirect:/home";
+        // Verificar si el usuario tiene rol ADMIN para redirigirlo al template admin-home.html
+        boolean isAdmin = userDetails.getAuthorities().stream()
+                .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+        if (isAdmin) {
+            return "redirect:/admin-home";
+        } else {
+            return "redirect:/home";
+        }
     }
 }

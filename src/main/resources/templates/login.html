@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Iniciar Sesión - Torneo Retro Gamer 2025</title>
     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-LtrjvnR4/J57+Cuom1Jfa2ZxFazJZAGPZVfW9L3R05T2D/c7yjhp+F9JB9N3duJ0"
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
           crossorigin="anonymous">
     <!-- Fuentes: Retro para títulos y Roboto para el contenido -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap"
+          rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/styles.css"/>
     <style>
         /* Centrado del título de la sección de Iniciar Sesión */
         #iniciar-sesion h2 {
@@ -46,13 +47,46 @@
 <body>
 <div id="page">
     <!-- Navbar -->
-    <nav class="navbar">
-        <ul>
-            <li><a href="/"><span class="icon">🎮</span> Inicio</a></li>
-            <li><a href="/torneo"><span class="icon">🏆</span> Torneos</a></li>
-            <li><a href="/login"><span class="icon">🔑</span> Iniciar Sesión</a></li>
-            <li><a href="/registro"><span class="icon">✍️</span> Registrarse</a></li>
-        </ul>
+    <!--    <nav class="navbar">-->
+    <!--        <ul>-->
+    <!--            <li><a href="/"><span class="icon">🎮</span> Inicio</a></li>-->
+    <!--            <li><a href="/torneo"><span class="icon">🏆</span> Torneos</a></li>-->
+    <!--            <li><a href="/login"><span class="icon">🔑</span> Iniciar Sesión</a></li>-->
+    <!--            <li><a href="/registro"><span class="icon">✍️</span> Registrarse</a></li>-->
+    <!--        </ul>-->
+    <!--    </nav>-->
+
+    <nav class="navbar bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">Retro Gamer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                    aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                 aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/}">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/torneo}">Torneos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/login}">Iniciar Sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/registro}">Registrarse</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </nav>
 
     <!-- Sección de Iniciar Sesión -->
@@ -72,7 +106,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="login-password">Contraseña:</label>
-                                    <input type="password" id="login-password" name="password" class="form-control" required>
+                                    <input type="password" id="login-password" name="password" class="form-control"
+                                           required>
                                 </div>
                                 <!-- Se muestra error si existe -->
                                 <div id="login-error" th:if="${error}" th:text="${error}"></div>
@@ -99,8 +134,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-LtrjvnR4/J57+Cuom1Jfa2ZxFazJZAGPZVfW9L3R05T2D/c7yjhp+F9JB9N3duJ0"
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
 </body>
 </html>

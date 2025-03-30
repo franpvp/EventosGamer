@@ -41,13 +41,8 @@ public class UsuarioEntity {
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private UserRole role;
-
-    @Column(name = "is_logged_in")
-    private boolean isLoggedIn;
-
-    @Column(name = "fecha_creacion")
-    private LocalDate fechaCreacion;
 
 }

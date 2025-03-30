@@ -19,8 +19,6 @@ public class UsuarioMapper {
                 .apellidoPaterno(usuarioEntity.getApellidoPaterno())
                 .apellidoMaterno(usuarioEntity.getApellidoMaterno())
                 .fechaNacimiento(usuarioEntity.getFechaNacimiento())
-                .isLoggedIn(usuarioEntity.isLoggedIn())
-                .fechaCreacion(usuarioEntity.getFechaCreacion())
                 .build();
     }
 
@@ -34,9 +32,7 @@ public class UsuarioMapper {
                 .apellidoPaterno(usuarioDTO.getApellidoPaterno())
                 .apellidoMaterno(usuarioDTO.getApellidoMaterno())
                 .fechaNacimiento(usuarioDTO.getFechaNacimiento())
-                .isLoggedIn(usuarioDTO.isLoggedIn())
-                .fechaCreacion(usuarioDTO.getFechaCreacion())
-                .role(UserRole.USER)
+                .role(UserRole.ROLE_USER)
                 .build();
     }
 }

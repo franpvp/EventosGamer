@@ -107,7 +107,7 @@ section {
 .glitch {
   position: relative;
   color: var(--primary-color);
-  font-size: 2.5em;
+  font-size: 3.5em;
   animation: glitch 2s infinite;
 }
 
@@ -347,4 +347,41 @@ footer {
 #mode8bit:checked + #page .glitch {
   animation: none;
   text-shadow: none;
+}
+
+.navbar {
+  background-color: #222;
+  border: 2px solid #fff;
+}
+.navbar-brand, .nav-link {
+  font-family: 'Press Start 2P', cursive;
+}
+.offcanvas {
+  background-color: #222;
+  color: #fff;
+  border: 2px solid #fff;
+}
+.offcanvas .btn-close-white {
+  filter: invert(1);
+}
+.offcanvas-header {
+  border-bottom: 2px solid #fff;
+}
+.offcanvas-body {
+  border-top: 2px solid #fff;
+}
+.navbar-toggler {
+  border-color: #fff;
+}
+
+.navbar-toggler-icon {
+  filter: invert(1);
+}
+.btn-outline-light {
+  border-color: #fff;
+  color: #fff;
+}
+.btn-outline-light:hover {
+  background-color: #fff;
+  color: #222;
 }
