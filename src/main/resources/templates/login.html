@@ -98,6 +98,10 @@
                 <div class="col-12 col-md-8">
                     <div class="forms-container">
                         <div class="form-card p-4">
+                            <!-- Mostrar mensaje de logout si el parámetro 'logout' está presente -->
+                            <div th:if="${param.logout}" class="alert alert-info text-center" role="alert">
+                                Sesión cerrada exitosamente.
+                            </div>
                             <!-- Al hacer submit, se envían los datos a /login -->
                             <form id="login-form" th:action="@{/login}" th:object="${auth}" method="post">
                                 <div class="form-group">

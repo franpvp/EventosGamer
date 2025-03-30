@@ -32,7 +32,7 @@ public class UsuarioMapper {
                 .apellidoPaterno(usuarioDTO.getApellidoPaterno())
                 .apellidoMaterno(usuarioDTO.getApellidoMaterno())
                 .fechaNacimiento(usuarioDTO.getFechaNacimiento())
-                .role(UserRole.ROLE_USER)
+                .role(UserRole.USER)
                 .build();
     }
 }

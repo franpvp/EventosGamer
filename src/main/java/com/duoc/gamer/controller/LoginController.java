@@ -56,7 +56,7 @@ public class LoginController {
         Cookie cookie = new Cookie("JWT_TOKEN", jwt);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
-        cookie.setMaxAge(24 * 60 * 60); // Expiración: 1 día
+        cookie.setMaxAge(24 * 60 * 60);// Expiración: 1 día
         response.addCookie(cookie);
 
         // Verificar si el usuario tiene rol ADMIN para redirigirlo al template admin-home.html
@@ -67,5 +67,16 @@ public class LoginController {
         } else {
             return "redirect:/home";
         }
+    }
+
+
+    @GetMapping("/logout")
+    public String cerrarSesion(HttpServletResponse response) {
+        Cookie cookie = new Cookie("JWT_TOKEN", null);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0); // La cookie se elimina de inmediato
+        response.addCookie(cookie);
+        return "redirect:/login?logout"; // Redirige al login, opcionalmente con un mensaje
     }
 }

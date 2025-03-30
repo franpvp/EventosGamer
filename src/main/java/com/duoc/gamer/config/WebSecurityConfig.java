@@ -37,9 +37,8 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/", "/home", "/login", "/contacto", "/registro", "/favicon.ico",
-                                "/css/**", "/js/**", "/images/**", "/authenticate", "/admin-home").permitAll()
+                                "/css/**", "/js/**", "/images/**", "/authenticate", "/admin-home", "/logout").permitAll()
                         .requestMatchers("/torneo", "/perfil").authenticated()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception

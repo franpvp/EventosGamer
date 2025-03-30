@@ -41,8 +41,7 @@ public class UsuarioEntity {
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
+    @Column(name = "rol")
     private UserRole role;
 
 }

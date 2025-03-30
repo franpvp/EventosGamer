@@ -8,7 +8,7 @@ public class HomeAdminController {
 
     @GetMapping("/admin-home")
     public String showHomeAdminPage() {
-        return "admin/admin.home";
+        return "admin-home";
     }
 
 }
