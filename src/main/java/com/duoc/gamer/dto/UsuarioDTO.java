@@ -25,7 +25,7 @@ public class UsuarioDTO {
     private String username;
 
     @NotNull(message = "El campo password no puede estar vacío")
-    @Size(min = 2, max = 20, message = "El campo password debe tener entre 2 y 20 caracteres")
+    @Size(min = 6, max = 20, message = "El campo password debe tener entre 6 y 20 caracteres")
     private String password;
 
     @NotNull(message = "El campo email no puede estar vacío")

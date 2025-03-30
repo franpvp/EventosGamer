@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,11 +30,20 @@
           justify-content: center;
           width: 100%;
         }
+        #login-error {
+          display: none;
+          background-color: #f8d7da;
+          color: #721c24;
+          padding: 10px;
+          border: 1px solid #f5c6cb;
+          border-radius: 4px;
+          text-align: center;
+          margin-bottom: 10px;
+          font-weight: bold;
+        }
     </style>
 </head>
 <body>
-<!-- Checkbox oculto para activar modo 8-bit -->
-<input type="checkbox" id="mode8bit" class="mode8bit-toggle" />
 <div id="page">
     <!-- Navbar -->
     <nav class="navbar">
@@ -43,7 +52,6 @@
             <li><a href="/torneo"><span class="icon">🏆</span> Torneos</a></li>
             <li><a href="/login"><span class="icon">🔑</span> Iniciar Sesión</a></li>
             <li><a href="/registro"><span class="icon">✍️</span> Registrarse</a></li>
-            <li><label for="mode8bit" class="toggle-8bit">🕹️ Modo 8 bits</label></li>
         </ul>
     </nav>
 
@@ -56,7 +64,8 @@
                 <div class="col-12 col-md-8">
                     <div class="forms-container">
                         <div class="form-card p-4">
-                            <form id="login-form">
+                            <!-- Al hacer submit, se envían los datos a /login -->
+                            <form id="login-form" th:action="@{/login}" th:object="${auth}" method="post">
                                 <div class="form-group">
                                     <label for="login-email">Correo Electrónico:</label>
                                     <input type="email" id="login-email" name="email" class="form-control" required>
@@ -65,8 +74,10 @@
                                     <label for="login-password">Contraseña:</label>
                                     <input type="password" id="login-password" name="password" class="form-control" required>
                                 </div>
+                                <!-- Se muestra error si existe -->
+                                <div id="login-error" th:if="${error}" th:text="${error}"></div>
                                 <button type="submit" class="form-button btn btn-primary btn-block">Entrar</button>
-                                <!-- Sección adicional: enlace para recuperar contraseña y botón para crear cuenta nueva -->
+                                <!-- Sección adicional: enlaces -->
                                 <div class="d-flex justify-content-between mt-3">
                                     <a href="/recuperar-contraseña" class="small">¿Olvidaste tu contraseña?</a>
                                     <a href="/registro" class="btn btn-secondary btn-sm">Crear cuenta nueva</a>
@@ -84,8 +95,7 @@
         <p>&copy; 2025 Retro Gamer Tournament. Todos los derechos reservados.</p>
     </footer>
 </div>
-
-<!-- Bootstrap JS y dependencias (opcional) -->
+<!-- Bootstrap JS y dependencias -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

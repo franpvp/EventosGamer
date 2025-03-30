@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,11 +15,16 @@
     <!-- Navbar -->
     <nav class="navbar">
         <ul>
-            <li><a href="/"><span class="icon">🎮</span> Inicio</a></li>
-            <li><a href="/torneo"><span class="icon">🏆</span> Torneos</a></li>
-            <li><a href="/login"><span class="icon">🔑</span> Iniciar Sesión</a></li>
-            <li><a href="/registro"><span class="icon">✍️</span> Registrarse</a></li>
-            <li><label for="mode8bit" class="toggle-8bit">🕹️ Modo 8 bits</label></li>
+            <li><a th:href="@{/}"><span class="icon">🎮</span> Inicio</a></li>
+            <li><a th:href="@{/torneo}"><span class="icon">🏆</span> Torneos</a></li>
+            <sec:authorize access="!isAuthenticated()">
+                <li><a th:href="@{/login}"><span class="icon">🔑</span> Iniciar Sesión</a></li>
+                <li><a th:href="@{/registro}"><span class="icon">✍️</span> Registrarse</a></li>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <li><a th:href="@{/perfil}"><span class="icon">👤</span> Perfil</a></li>
+                <li><a th:href="@{/logout}"><span class="icon">🚪</span> Cerrar Sesión</a></li>
+            </sec:authorize>
         </ul>
     </nav>
 

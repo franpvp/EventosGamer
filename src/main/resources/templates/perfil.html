@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil de Usuario - Torneo Retro Gamer 2025</title>
+    <!-- Fuentes: Retro para títulos y Roboto para el contenido -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/js/index.js" />
+    <style>
+        #perfil h2 {
+            text-align: center;
+            margin: 0 auto;
+        }
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: #222;
+            color: #fff;
+        }
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+            margin-bottom: 20px;
+        }
+        .profile-data {
+            width: 100%;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+        }
+        .profile-data p {
+            margin: 5px 0;
+        }
+        .profile-data span {
+            font-weight: bold;
+            font-family: 'Press Start 2P', cursive;
+        }
+    </style>
+</head>
+<body>
+<!-- Checkbox oculto para activar modo 8-bit -->
+<input type="checkbox" id="mode8bit" class="mode8bit-toggle" />
+<div id="page">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="/"><span class="icon">🎮</span> Inicio</a></li>
+            <li><a href="/torneo"><span class="icon">🏆</span> Torneos</a></li>
+            <li><a href="/login"><span class="icon">🔑</span> Iniciar Sesión</a></li>
+            <li><a href="/perfil"><span class="icon">👤</span> Perfil</a></li>
+            <li><label for="mode8bit" class="toggle-8bit">🕹️ Modo 8 bits</label></li>
+        </ul>
+    </nav>
+
+    <!-- Sección de Perfil -->
+    <section id="perfil">
+        <h2>Perfil</h2>
+        <div class="profile-container">
+            <!-- Foto de perfil -->
+            <img src="/images/default-profile.png" alt="Foto de perfil" class="profile-picture" />
+            <!-- Datos del usuario -->
+            <div class="profile-data">
+                <p><span>Username:</span> usuario123</p>
+                <p><span>Correo Electrónico:</span> usuario@example.com</p>
+                <p><span>Nombre:</span> Juan</p>
+                <p><span>Apellido Paterno:</span> Pérez</p>
+                <p><span>Apellido Materno:</span> Gómez</p>
+                <p><span>Fecha de Nacimiento:</span> 01/01/1990</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Retro Gamer Tournament. Todos los derechos reservados.</p>
+    </footer>
+</div>
+</body>
+</html>

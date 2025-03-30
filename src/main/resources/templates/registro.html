@@ -10,59 +10,73 @@
     <link rel="stylesheet" href="/js/index.js" />
     <style>
         #registrarse h2 {
-            text-align: center;
-            margin: 0 auto;
+          text-align: center;
+          margin: 0 auto;
         }
         .forms-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
         }
         .form-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #333;
-            border-radius: 8px;
-            background: #222;
-            color: #fff;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 100%;
+          max-width: 500px;
+          margin: 0 auto;
+          padding: 20px;
+          border: 1px solid #333;
+          border-radius: 8px;
+          background: #222;
+          color: #fff;
         }
         .form-group {
-            margin-bottom: 15px;
+          margin-bottom: 15px;
+          position: relative;
         }
         .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.9em;
+          display: block;
+          margin-bottom: 5px;
+          font-family: 'Press Start 2P', cursive;
+          font-size: 0.9em;
         }
         .form-group input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #555;
-            border-radius: 4px;
-            background: #333;
-            color: #fff;
+          width: 100%;
+          padding: 8px 40px 8px 8px; /* Dejamos espacio para el ícono */
+          border: 1px solid #555;
+          border-radius: 4px;
+          background: #333;
+          color: #fff;
+        }
+        .toggle-password {
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          cursor: pointer;
+          color: #fff;
         }
         .form-button {
-            width: 100%;
-            padding: 10px;
-            background: linear-gradient(45deg, #0ff, #ff0);
-            border: none;
-            font-family: 'Press Start 2P', cursive;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            color: #000;
+          width: 100%;
+          padding: 10px;
+          background: linear-gradient(45deg, #0ff, #ff0);
+          border: none;
+          font-family: 'Press Start 2P', cursive;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: transform 0.2s, box-shadow 0.2s;
+          color: #000;
         }
         .form-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 10px #0ff;
+          transform: scale(1.05);
+          box-shadow: 0 0 10px #0ff;
+        }
+        #password-error {
+          color: red;
+          display: none;
+          font-size: 0.9em;
         }
     </style>
 </head>
@@ -113,7 +127,14 @@
                     </div>
                     <div class="form-group">
                         <label for="register-password">Contraseña:</label>
-                        <input type="password" id="register-password" th:field="*{password}" required>
+                        <input type="password" id="register-password" th:field="*{password}" required minlength="6">
+                        <i class="fa fa-eye toggle-password" id="toggle-password" onclick="togglePasswordVisibility('register-password', 'toggle-password')"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm-password">Confirmar Contraseña:</label>
+                        <input type="password" id="register-confirm-password" required minlength="6">
+                        <i class="fa fa-eye toggle-password" id="toggle-confirm-password" onclick="togglePasswordVisibility('register-confirm-password', 'toggle-confirm-password')"></i>
+                        <small id="password-error">Las contraseñas no coinciden.</small>
                     </div>
                     <!-- Los campos role, isLoggedIn y fechaCreacion se asignan automáticamente en el backend -->
                     <button type="submit" class="form-button">Registrarse</button>
@@ -126,6 +147,43 @@
     <footer>
         <p>&copy; 2025 Retro Gamer Tournament. Todos los derechos reservados.</p>
     </footer>
+
+    <!-- Bootstrap JS y dependencias (opcional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-LtrjvnR4/J57+Cuom1Jfa2ZxFazJZAGPZVfW9L3R05T2D/c7yjhp+F9JB9N3duJ0"
+            crossorigin="anonymous"></script>
+    <script>
+        // Función para alternar la visibilidad de un input de contraseña
+        function togglePasswordVisibility(inputId, toggleIconId) {
+          var input = document.getElementById(inputId);
+          var icon = document.getElementById(toggleIconId);
+          if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+          } else {
+            input.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+          }
+        }
+
+        // Validación de coincidencia de contraseñas al enviar el formulario
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+          var password = document.getElementById('register-password').value;
+          var confirmPassword = document.getElementById('register-confirm-password').value;
+          var errorMessage = document.getElementById('password-error');
+          if (password !== confirmPassword) {
+            event.preventDefault();
+            errorMessage.style.display = 'block';
+          } else {
+            errorMessage.style.display = 'none';
+          }
+        });
+    </script>
 </div>
 
 </body>
