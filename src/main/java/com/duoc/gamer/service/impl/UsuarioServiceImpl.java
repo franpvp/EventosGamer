@@ -44,6 +44,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         return null;
     }
 
+    @Override
+    public UsuarioDTO findByEmail(String email) {
+
+        return usuarioRepository.findByEmail(email)
+                .map(usuarioMapper::usuarioEntityToDto)
+                .orElseThrow(() -> new UsuarioNotFoundException("Usuario no encontrado con email: " + email));
+    }
+
     // Crea un nuevo usuario a partir del DTO recibido, lo guarda y retorna el DTO del usuario creado
     public UsuarioDTO createUsuario(UsuarioDTO usuarioDTO) {
         // Guardar el usuario usando JPA

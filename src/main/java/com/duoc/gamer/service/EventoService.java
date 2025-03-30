@@ -6,10 +6,15 @@ import java.util.List;
 
 public interface EventoService {
 
-    List<EventoDTO> getEventos();
+    List<EventoDTO> getAllEventos();
+
     EventoDTO getEventoById(Long id);
+
     EventoDTO crearEvento(EventoDTO eventoDTO);
+
     EventoDTO modificarEvento(EventoDTO eventoDTO);
+
     void eliminarEventoById(Long id);
+
 
 }

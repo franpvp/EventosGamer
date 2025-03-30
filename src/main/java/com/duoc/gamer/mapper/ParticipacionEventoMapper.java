@@ -9,18 +9,18 @@ public class ParticipacionEventoMapper {
 
     public ParticipacionEventoDTO participacionEventoEntityToDto(ParticipacionEventoEntity participacionEventoEntity) {
         return ParticipacionEventoDTO.builder()
-                .id(participacionEventoEntity.getId())
-                .usuario(participacionEventoEntity.getUsuario())
-                .evento(participacionEventoEntity.getEvento())
+                .idParticipacionEvento(participacionEventoEntity.getIdEvento())
+                .idUsuario(participacionEventoEntity.getIdUsuario())
+                .idEvento(participacionEventoEntity.getIdEvento())
                 .fechaInscripcion(participacionEventoEntity.getFechaInscripcion())
                 .build();
     }
 
     public ParticipacionEventoEntity participacionEventoDtoToEntity(ParticipacionEventoDTO participacionEventoDTO) {
         return ParticipacionEventoEntity.builder()
-                .id(participacionEventoDTO.getId())
-                .usuario(participacionEventoDTO.getUsuario())
-                .evento(participacionEventoDTO.getEvento())
+                .idParticipacionEvento(participacionEventoDTO.getIdParticipacionEvento())
+                .idUsuario(participacionEventoDTO.getIdUsuario())
+                .idEvento(participacionEventoDTO.getIdEvento())
                 .fechaInscripcion(participacionEventoDTO.getFechaInscripcion())
                 .build();
     }

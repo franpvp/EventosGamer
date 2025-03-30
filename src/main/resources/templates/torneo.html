@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap"
           rel="stylesheet"/>
     <link rel="stylesheet" href="/css/styles.css">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
     <style>
         #eventos-participacion h2 {
           text-align: center;
@@ -103,93 +104,102 @@
         <!-- Grid responsivo: 1 columna en dispositivos pequeños y 3 columnas en dispositivos medianos en adelante -->
         <div class="row">
             <!-- Card Evento 1 -->
-            <div class="col-12 col-md-8 mx-auto mb-4">
+            <div class="col-12 col-md-8 mx-auto mb-4" th:each="evento : ${eventos}">
                 <div class="card text-center">
                     <div class="card-img-container">
-                        <img src="/images/evento-fornite.jpg" alt="Evento Retro 1" class="img-fluid">
+                        <!-- Puedes utilizar un campo de imagen (por ejemplo, evento.imagen) si lo tienes; de lo contrario, usa una imagen por defecto -->
+                        <img th:src="@{${evento.imagen} != null ? ${evento.imagen} : '/images/usuario-de-perfil.png'}"
+                             alt="Imagen del evento" class="img-fluid">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Evento Fornite</h5>
-                        <p class="card-text">Compite en este evento clásico y demuestra tus habilidades en juegos
-                            retro.</p>
-                        <!-- Lista de detalles del evento -->
+                        <h5 class="card-title" th:text="${evento.titulo}">Título del Evento</h5>
+                        <p class="card-text" th:text="${evento.descripcion}">Descripción del evento</p>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><strong>Categoría:</strong> Retro</li>
-                            <li class="list-group-item"><strong>Fecha y Hora:</strong> 30/03/2025, 18:00</li>
-                            <li class="list-group-item"><strong>Ubicación:</strong> Centro de Convenciones, Ciudad XYZ
+                            <li class="list-group-item"><strong>Fecha y Hora:</strong>
+                                <span th:text="${#dates.format(evento.fechaInicio, 'dd/MM/yyyy, HH:mm')}">Fecha y Hora</span>
                             </li>
-                            <li class="list-group-item"><strong>Organizadores:</strong> Retro Events Co.</li>
-                            <li class="list-group-item"><strong>Servicios:</strong> Estacionamiento, Locomoción
-                                colectiva, Comidas, Alojamiento
+                            <!-- Ubicación: Si la incluyes en tu entidad, muéstrala; de lo contrario, puedes omitirla -->
+                            <li class="list-group-item" th:if="${evento.ubicacion != null}">
+                                <strong>Ubicación:</strong> <span th:text="${evento.ubicacion}">Ubicación</span>
                             </li>
-                            <li class="list-group-item"><strong>Expositores:</strong> Expositor A, Expositor B</li>
-                            <li class="list-group-item"><strong>Premios:</strong> Trofeo, Medalla y mucho más.</li>
+                            <li class="list-group-item"><strong>Organizadores:</strong> <span
+                                    th:text="${evento.organizadores}">Organizadores</span></li>
+                            <li class="list-group-item"><strong>Servicios:</strong> <span th:text="${evento.servicios}">Servicios</span>
+                            </li>
+                            <li class="list-group-item"><strong>Expositores:</strong> <span
+                                    th:text="${evento.expositores}">Expositores</span></li>
+                            <li class="list-group-item"><strong>Premios:</strong> <span th:text="${evento.premios}">Premios</span>
+                            </li>
                         </ul>
                     </div>
                     <div class="card-footer">
-                        <a href="/participar/evento1" class="btn participar-btn d-block mx-auto">Participar</a>
+                        <button type="button"
+                                class="btn participar-btn d-block mx-auto"
+                                th:attr="data-eventoId=${evento.idEvento}"
+                                onclick="participarEvento(this)">Participar
+                        </button>
                     </div>
                 </div>
             </div>
             <!-- Card Evento 2 -->
-            <div class="col-12 col-md-8 mx-auto mb-4">
-                <div class="card text-center">
-                    <div class="card-img-container">
-                        <img src="/images/marvel-rivals-evento.png" alt="Evento Retro 2" class="img-fluid">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Evento Rivals</h5>
-                        <p class="card-text">Pon a prueba tu destreza en competencias llenas de nostalgia y premios.</p>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><strong>Categoría:</strong> Competitivo</li>
-                            <li class="list-group-item"><strong>Fecha y Hora:</strong> 05/04/2025, 20:00</li>
-                            <li class="list-group-item"><strong>Ubicación:</strong> Auditorio Central, Ciudad ABC</li>
-                            <li class="list-group-item"><strong>Organizadores:</strong> Retro Sports Inc.</li>
-                            <li class="list-group-item"><strong>Servicios:</strong> Estacionamiento, Locomoción
-                                colectiva, Comidas
-                            </li>
-                            <li class="list-group-item"><strong>Expositores:</strong> Expositor X, Expositor Y,
-                                Expositor Z
-                            </li>
-                            <li class="list-group-item"><strong>Premios:</strong> Cupón, Trofeo y Reconocimientos.</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer">
-                        <a href="/participar/evento2" class="btn participar-btn d-block mx-auto">Participar</a>
-                    </div>
-                </div>
-            </div>
+            <!--            <div class="col-12 col-md-8 mx-auto mb-4">-->
+            <!--                <div class="card text-center">-->
+            <!--                    <div class="card-img-container">-->
+            <!--                        <img src="/images/marvel-rivals-evento.png" alt="Evento Retro 2" class="img-fluid">-->
+            <!--                    </div>-->
+            <!--                    <div class="card-body">-->
+            <!--                        <h5 class="card-title">Evento Rivals</h5>-->
+            <!--                        <p class="card-text">Pon a prueba tu destreza en competencias llenas de nostalgia y premios.</p>-->
+            <!--                        <ul class="list-group list-group-flush">-->
+            <!--                            <li class="list-group-item"><strong>Categoría:</strong> Competitivo</li>-->
+            <!--                            <li class="list-group-item"><strong>Fecha y Hora:</strong> 05/04/2025, 20:00</li>-->
+            <!--                            <li class="list-group-item"><strong>Ubicación:</strong> Auditorio Central, Ciudad ABC</li>-->
+            <!--                            <li class="list-group-item"><strong>Organizadores:</strong> Retro Sports Inc.</li>-->
+            <!--                            <li class="list-group-item"><strong>Servicios:</strong> Estacionamiento, Locomoción-->
+            <!--                                colectiva, Comidas-->
+            <!--                            </li>-->
+            <!--                            <li class="list-group-item"><strong>Expositores:</strong> Expositor X, Expositor Y,-->
+            <!--                                Expositor Z-->
+            <!--                            </li>-->
+            <!--                            <li class="list-group-item"><strong>Premios:</strong> Cupón, Trofeo y Reconocimientos.</li>-->
+            <!--                        </ul>-->
+            <!--                    </div>-->
+            <!--                    <div class="card-footer">-->
+            <!--                        <a href="/participar/evento2" class="btn participar-btn d-block mx-auto">Participar</a>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
             <!-- Card Evento 3 -->
-            <div class="col-12 col-md-8 mx-auto mb-4">
-                <div class="card text-center">
-                    <div class="card-img-container">
-                        <img src="/images/overwatch2.jpg" alt="Overwatch 2" class="img-fluid">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Overwatch 2</h5>
-                        <p class="card-text">Sumérgete en una experiencia única y retro, y compite por increíbles
-                            premios.</p>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><strong>Categoría:</strong> Estrategia</li>
-                            <li class="list-group-item"><strong>Fecha y Hora:</strong> 12/04/2025, 19:00</li>
-                            <li class="list-group-item"><strong>Ubicación:</strong> Centro de Exposiciones, Ciudad LMN
-                            </li>
-                            <li class="list-group-item"><strong>Organizadores:</strong> Gaming Legends</li>
-                            <li class="list-group-item"><strong>Servicios:</strong> Estacionamiento, Comidas,
-                                Alojamiento
-                            </li>
-                            <li class="list-group-item"><strong>Expositores:</strong> Expositor 1, Expositor 2,
-                                Expositor 3
-                            </li>
-                            <li class="list-group-item"><strong>Premios:</strong> Medalla de Honor, Trofeo y sorpresas.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-footer">
-                        <a href="/participar/evento3" class="btn participar-btn d-block mx-auto">Participar</a>
-                    </div>
-                </div>
-            </div>
+            <!--            <div class="col-12 col-md-8 mx-auto mb-4">-->
+            <!--                <div class="card text-center">-->
+            <!--                    <div class="card-img-container">-->
+            <!--                        <img src="/images/overwatch2.jpg" alt="Overwatch 2" class="img-fluid">-->
+            <!--                    </div>-->
+            <!--                    <div class="card-body">-->
+            <!--                        <h5 class="card-title">Overwatch 2</h5>-->
+            <!--                        <p class="card-text">Sumérgete en una experiencia única y retro, y compite por increíbles-->
+            <!--                            premios.</p>-->
+            <!--                        <ul class="list-group list-group-flush">-->
+            <!--                            <li class="list-group-item"><strong>Categoría:</strong> Estrategia</li>-->
+            <!--                            <li class="list-group-item"><strong>Fecha y Hora:</strong> 12/04/2025, 19:00</li>-->
+            <!--                            <li class="list-group-item"><strong>Ubicación:</strong> Centro de Exposiciones, Ciudad LMN-->
+            <!--                            </li>-->
+            <!--                            <li class="list-group-item"><strong>Organizadores:</strong> Gaming Legends</li>-->
+            <!--                            <li class="list-group-item"><strong>Servicios:</strong> Estacionamiento, Comidas,-->
+            <!--                                Alojamiento-->
+            <!--                            </li>-->
+            <!--                            <li class="list-group-item"><strong>Expositores:</strong> Expositor 1, Expositor 2,-->
+            <!--                                Expositor 3-->
+            <!--                            </li>-->
+            <!--                            <li class="list-group-item"><strong>Premios:</strong> Medalla de Honor, Trofeo y sorpresas.-->
+            <!--                            </li>-->
+            <!--                        </ul>-->
+            <!--                    </div>-->
+            <!--                    <div class="card-footer">-->
+            <!--                        <a href="/participar/evento3" class="btn participar-btn d-block mx-auto">Participar</a>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
             <!-- Más cards según tus necesidades -->
         </div>
     </section>
@@ -199,5 +209,45 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
+
+<script>
+    // Función para obtener el token CSRF (si usas Spring Security y lo tienes en un meta tag)
+    function getCsrfToken() {
+        const tokenMeta = document.querySelector('meta[name="_csrf"]');
+        return tokenMeta ? tokenMeta.getAttribute('content') : '';
+    }
+
+    // Función que envía la petición POST para participar en el evento
+    function participarEvento(button) {
+        // Obtener el id del evento desde el atributo data-eventoId del botón
+        const eventoId = button.getAttribute('data-eventoId');
+        // Obtener el token CSRF, en caso de que esté habilitado (opcional)
+        const csrfToken = getCsrfToken();
+
+        fetch('/torneo/' + eventoId, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Enviar el token CSRF en el header si es necesario (Spring Security espera el header "X-CSRF-TOKEN")
+                'X-CSRF-TOKEN': csrfToken
+            },
+            // Si necesitas enviar datos adicionales en el body, puedes agregarlos como JSON.
+            body: JSON.stringify({}) // En este caso, el endpoint solo necesita la URL y la fecha actual la genera en el backend.
+        })
+        .then(response => {
+            if(response.ok) {
+                // Redirige a la página de confirmación o muestra un mensaje
+                window.location.href = "/participar/confirmacion";
+            } else {
+                console.error("Error en la participación:", response.statusText);
+                alert("No se pudo registrar tu participación. Inténtalo nuevamente.");
+            }
+        })
+        .catch(error => {
+            console.error("Error en la petición:", error);
+            alert("Ocurrió un error. Por favor, inténtalo más tarde.");
+        });
+    }
+</script>
 </body>
 </html>

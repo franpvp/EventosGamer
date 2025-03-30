@@ -16,20 +16,27 @@ public class EventoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_evento")
     private Long idEvento;
 
-    @Column(name = "titulo")
+    @Column(name = "titulo", nullable = false, length = 30)
     private String titulo;
 
-    @Column(name = "descripcion")
+    @Column(name = "descripcion", nullable = false, length = 100)
     private String descripcion;
 
-    @Column(name = "fecha_inicio_evento")
-    private LocalDate fechaInicioEvento;
+    @Column(name = "fecha_inicio", nullable = false)
+    private LocalDate fechaInicio;
 
-    @Column(name = "fecha_fin_evento")
-    private LocalDate fechaFinEvento;
+    @Column(name = "organizadores", nullable = false, length = 50)
+    private String organizadores;
 
-    @Column(name = "fechaCreacionEvento")
-    private String creacionEvento;
+    @Column(name = "servicios", nullable = false, length = 100)
+    private String servicios;
+
+    @Column(name = "expositores", nullable = false, length = 50)
+    private String expositores;
+
+    @Column(name = "premios", nullable = false, length = 50)
+    private String premios;
 }

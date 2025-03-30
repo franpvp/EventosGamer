@@ -65,10 +65,7 @@
                                 <a class="nav-link" th:href="@{/perfil}">Perfil</a>
                             </li>
                             <li class="nav-item">
-                                <form th:action="@{/logout}" method="get" style="display: inline;">
-                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                                    <button type="submit" class="nav-link">Cerrar Sesión</button>
-                                </form>
+                                <a class="nav-link" th:href="@{/logout}">Cerrar Sesión</a>
                             </li>
                         </th:block>
                     </ul>

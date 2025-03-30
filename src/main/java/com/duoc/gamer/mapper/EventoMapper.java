@@ -12,9 +12,11 @@ public class EventoMapper {
                 .idEvento(eventoEntity.getIdEvento())
                 .titulo(eventoEntity.getTitulo())
                 .descripcion(eventoEntity.getDescripcion())
-                .fechaInicioEvento(eventoEntity.getFechaInicioEvento())
-                .fechaFinEvento(eventoEntity.getFechaFinEvento())
-                .creacionEvento(eventoEntity.getCreacionEvento())
+                .fechaInicio(eventoEntity.getFechaInicio())
+                .organizadores(eventoEntity.getOrganizadores())
+                .servicios(eventoEntity.getServicios())
+                .expositores(eventoEntity.getExpositores())
+                .premios(eventoEntity.getPremios())
                 .build();
     }
 
@@ -23,9 +25,11 @@ public class EventoMapper {
                 .idEvento(eventoDTO.getIdEvento())
                 .titulo(eventoDTO.getTitulo())
                 .descripcion(eventoDTO.getDescripcion())
-                .fechaInicioEvento(eventoDTO.getFechaInicioEvento())
-                .fechaFinEvento(eventoDTO.getFechaFinEvento())
-                .creacionEvento(eventoDTO.getCreacionEvento())
+                .fechaInicio(eventoDTO.getFechaInicio())
+                .organizadores(eventoDTO.getOrganizadores())
+                .servicios(eventoDTO.getServicios())
+                .expositores(eventoDTO.getExpositores())
+                .premios(eventoDTO.getPremios())
                 .build();
     }
 }

@@ -1,11 +1,7 @@
 package com.duoc.gamer.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -14,6 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class EventoDTO {
 
     @NotNull(message = "El campo idEvento no puede estar vacío")
@@ -25,12 +22,18 @@ public class EventoDTO {
     @NotNull(message = "El campo descripcion no puede estar vacío")
     private String descripcion;
 
-    @NotNull(message = "El campo fechaInicioEvento no puede estar vacío")
-    private LocalDate fechaInicioEvento;
+    @NotNull(message = "El campo fechaInicio no puede estar vacío")
+    private LocalDate fechaInicio;
 
-    @NotNull(message = "El campo fechaFinEvento no puede estar vacío")
-    private LocalDate fechaFinEvento;
+    @NotNull(message = "El campo organizadores no puede estar vacío")
+    private String organizadores;
 
-    @NotNull(message = "El campo creacionEvento no puede estar vacío")
-    private String creacionEvento;
+    @NotNull(message = "El campo servicios no puede estar vacío")
+    private String servicios;
+
+    @NotNull(message = "El campo expositores no puede estar vacío")
+    private String expositores;
+
+    @NotNull(message = "El campo premios no puede estar vacío")
+    private String premios;
 }
