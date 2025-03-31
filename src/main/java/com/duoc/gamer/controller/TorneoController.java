@@ -53,7 +53,8 @@ public class TorneoController {
         UsuarioDTO usuario = usuarioService.findByEmail(username);
         // Registrar la participación utilizando el id del usuario, el id del evento y la fecha actual
         participacionEventoService.registrarParticipacion(usuario.getId(), eventoId, LocalDate.now());
-        return "redirect:/torneo/confirmacion"; // Redirige a una página de confirmación o similar
+        return "redirect:/torneo/confirmacion";
     }
+
 
 }

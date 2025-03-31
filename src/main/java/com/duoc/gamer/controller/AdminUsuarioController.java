@@ -1,6 +1,7 @@
 package com.duoc.gamer.controller;
 
 import com.duoc.gamer.dto.UsuarioDTO;
+import com.duoc.gamer.enums.UserRole;
 import com.duoc.gamer.mapper.UsuarioMapper;
 import com.duoc.gamer.security.JwtTokenUtil;
 import com.duoc.gamer.service.UsuarioService;
@@ -61,6 +62,16 @@ public class AdminUsuarioController {
                                  BindingResult result, Model model, HttpServletResponse response) {
         if (result.hasErrors()) {
             log.error("Error validaciones");
+            return "gestion-usuarios";
+        }
+
+        // Convertir el valor del rol recibido en el formulario a un valor del enum
+        try {
+            UserRole role = UserRole.valueOf(String.valueOf(nuevoUsuario.getRole()));
+            nuevoUsuario.setRole(role);  // Asigna el rol al usuario
+        } catch (IllegalArgumentException e) {
+            log.error("Rol inválido: " + nuevoUsuario.getRole());
+            result.rejectValue("role", "error.role", "El rol seleccionado no es válido.");
             return "gestion-usuarios";
         }
 

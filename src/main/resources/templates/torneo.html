@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap"
           rel="stylesheet"/>
     <link rel="stylesheet" href="/css/styles.css">
-    <meta name="_csrf" th:content="${_csrf.token}"/>
     <style>
         #eventos-participacion h2 {
           text-align: center;
@@ -129,11 +128,12 @@
                         </ul>
                     </div>
                     <div class="card-footer">
-                        <button type="button"
-                                class="btn participar-btn d-block mx-auto"
-                                th:attr="data-eventoId=${evento.idEvento}"
-                                onclick="participarEvento(this)">Participar
-                        </button>
+                        <!-- Formulario para enviar los datos -->
+                        <form th:action="@{/torneo/{eventoId}(eventoId=${evento.idEvento})}" method="post">
+                            <input type="hidden" name="eventoId" th:value="${evento.idEvento}">
+                            <!-- Asumiendo que 'id' está disponible en el objeto principal -->
+                            <button type="submit" class="btn participar-btn d-block mx-auto">Participar</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -145,45 +145,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
-
-<script>
-    // Función para obtener el token CSRF (si usas Spring Security y lo tienes en un meta tag)
-    function getCsrfToken() {
-        const tokenMeta = document.querySelector('meta[name="_csrf"]');
-        return tokenMeta ? tokenMeta.getAttribute('content') : '';
-    }
-
-    // Función que envía la petición POST para participar en el evento
-    function participarEvento(button) {
-        // Obtener el id del evento desde el atributo data-eventoId del botón
-        const eventoId = button.getAttribute('data-eventoId');
-        // Obtener el token CSRF, en caso de que esté habilitado (opcional)
-        const csrfToken = getCsrfToken();
-
-        fetch('/torneo/' + eventoId, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                // Enviar el token CSRF en el header si es necesario (Spring Security espera el header "X-CSRF-TOKEN")
-                'X-CSRF-TOKEN': csrfToken
-            },
-            // Si necesitas enviar datos adicionales en el body, puedes agregarlos como JSON.
-            body: JSON.stringify({}) // En este caso, el endpoint solo necesita la URL y la fecha actual la genera en el backend.
-        })
-        .then(response => {
-            if(response.ok) {
-                // Redirige a la página de confirmación o muestra un mensaje
-                window.location.href = "/participar/confirmacion";
-            } else {
-                console.error("Error en la participación:", response.statusText);
-                alert("No se pudo registrar tu participación. Inténtalo nuevamente.");
-            }
-        })
-        .catch(error => {
-            console.error("Error en la petición:", error);
-            alert("Ocurrió un error. Por favor, inténtalo más tarde.");
-        });
-    }
-</script>
 </body>
 </html>

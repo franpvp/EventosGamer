@@ -109,6 +109,27 @@
           color: #fff;
           font-family: 'Press Start 2P', cursive;
         }
+        .retro-select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            background: #222;
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 16px;
+        }
+
+        .retro-select option {
+            background: #111;
+            color: #fff;
+        }
+
+        .retro-select:focus {
+            outline: none;
+            border-color: #0ff;
+            box-shadow: 0 0 5px #0ff;
+        }
     </style>
 </head>
 <body>
@@ -181,14 +202,26 @@
                         <input type="text" id="apellidoMaterno" th:field="*{apellidoMaterno}" required>
                     </div>
                     <div class="form-group">
+                        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                        <input type="date" id="fechaNacimiento" th:field="*{fechaNacimiento}" required>
+                    </div>
+                    <div class="form-group">
                         <label for="password">Contraseña:</label>
                         <input type="password" id="password" th:field="*{password}" required>
                     </div>
                     <div class="form-group">
                         <label for="role">Rol:</label>
-                        <input type="text" id="role" th:field="*{role}" required>
+                        <select id="role" th:field="*{role}" required class="retro-select">
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="MODERATOR">MODERATOR</option>
+                            <option value="VIEWER">VIEWER</option>
+                            <option value="USER">USER</option>
+                        </select>
                     </div>
-                    <button type="submit" class="btn">Agregar Usuario</button>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn">Agregar Usuario</button>
+                    </div>
+
                 </form>
             </div>
         </div>

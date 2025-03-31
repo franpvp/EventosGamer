@@ -2,7 +2,6 @@ package com.duoc.gamer.mapper;
 
 import com.duoc.gamer.dto.UsuarioDTO;
 import com.duoc.gamer.entities.UsuarioEntity;
-import com.duoc.gamer.enums.UserRole;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -32,7 +31,6 @@ public class UsuarioMapper {
                 .apellidoPaterno(usuarioDTO.getApellidoPaterno())
                 .apellidoMaterno(usuarioDTO.getApellidoMaterno())
                 .fechaNacimiento(usuarioDTO.getFechaNacimiento())
-                .role(UserRole.USER)
                 .build();
     }
 }

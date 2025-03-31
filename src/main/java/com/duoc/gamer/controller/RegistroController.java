@@ -1,6 +1,7 @@
 package com.duoc.gamer.controller;
 
 import com.duoc.gamer.dto.UsuarioDTO;
+import com.duoc.gamer.enums.UserRole;
 import com.duoc.gamer.service.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +40,7 @@ public class RegistroController {
         // Encriptar la contraseña antes de guardarla
         String encodedPassword = passwordEncoder.encode(usuarioDTO.getPassword());
         usuarioDTO.setPassword(encodedPassword);
+        usuarioDTO.setRole(UserRole.USER);
 
         usuarioService.createUsuario(usuarioDTO);
         return "redirect:/login";
