@@ -45,7 +45,7 @@ public class LoginController {
                     new UsernamePasswordAuthenticationToken(authDTO.getEmail(), authDTO.getPassword())
             );
         } catch (BadCredentialsException e) {
-            model.addAttribute("error", "Credenciales incorrectas");
+            model.addAttribute("mensajeError", "Correo o contraseña incorrectos");
             return "login";
         }
         // Generar token JWT

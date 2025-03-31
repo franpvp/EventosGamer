@@ -109,7 +109,8 @@
                                 <button type="submit" class="form-button btn btn-primary btn-block">Entrar</button>
 
                                 <div th:if="${mensajeError}"
-                                     class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                                     class="alert alert-danger alert-dismissible fade show text-center mt-3"
+                                     role="alert">
                                     <span th:text="${mensajeError}"></span>
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"
                                             aria-label="Close"></button>
