@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -46,14 +47,18 @@ public class TorneoController {
 
     @PostMapping("/torneo/{eventoId}")
     public String participarEvento(@PathVariable("eventoId") Long eventoId,
-                                   @AuthenticationPrincipal UserDetails userDetails) {
+                                   @AuthenticationPrincipal UserDetails userDetails,
+                                   RedirectAttributes redirectAttributes) {
         // Obtener el username del usuario autenticado
         String username = userDetails.getUsername();
-        // Recuperar el objeto UsuarioDTO a partir del username (similar a lo que haces en PerfilController)
+        // Recuperar el objeto UsuarioDTO a partir del username
         UsuarioDTO usuario = usuarioService.findByEmail(username);
         // Registrar la participación utilizando el id del usuario, el id del evento y la fecha actual
         participacionEventoService.registrarParticipacion(usuario.getId(), eventoId, LocalDate.now());
-        return "redirect:/torneo/confirmacion";
+
+        // Agregar un atributo flash para mostrar el mensaje en la vista
+        redirectAttributes.addFlashAttribute("mensaje", "¡Te has registrado para participar en el evento!");
+        return "redirect:/torneo"; // Redirige a /torneo
     }
 
 
