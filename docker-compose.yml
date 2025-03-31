@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # Servicio para tu aplicación Spring Boot
+  app:
+    build: .
+    container_name: springboot-app
+    ports:
+      - "8080:8080"  # Expone el puerto 8080 del contenedor al puerto 8080 de la máquina host
+    depends_on:
+      - db  # Asegura que el contenedor de la base de datos se inicie antes que la aplicación
+    networks:
+      - mynetwork  # Conecta el contenedor a la red interna llamada 'mynetwork'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/mydb  # URL de conexión a la base de datos MySQL
+      - SPRING_DATASOURCE_USERNAME=root  # Usuario para la conexión a MySQL
+      - SPRING_DATASOURCE_PASSWORD=rootpassword  # Contraseña para la conexión a MySQL
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update  # Configura Hibernate para manejar el esquema de la base de datos
+
+  # Servicio para la base de datos MySQL
+  db:
+    image: mysql:8.0  # Usamos la imagen oficial de MySQL 8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword  # Contraseña del usuario root
+      MYSQL_DATABASE: mydb  # Base de datos predeterminada que se creará
+      MYSQL_PASSWORD: rootpassword  # Contraseña para el usuario root
+    ports:
+      - "3306:3306"  # Exponemos el puerto 3306 del contenedor al puerto 3306 de la máquina host
+    networks:
+      - mynetwork  # Conecta el contenedor a la red interna llamada 'mynetwork'
+    volumes:
+      - db-data:/var/lib/mysql  # Persistencia de los datos de la base de datos usando un volumen Docker
+
+# Definir la red compartida entre los contenedores
+networks:
+  mynetwork:
+    driver: bridge  # Usamos la red de tipo 'bridge' para conectar los contenedores entre sí
+
+# Volumen para persistir los datos de la base de datos
+volumes:
+  db-data:
+    driver: local  # Usamos el controlador de volumen local de Docker para persistir los datos
