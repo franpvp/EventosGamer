@@ -46,16 +46,6 @@
 </head>
 <body>
 <div id="page">
-    <!-- Navbar -->
-    <!--    <nav class="navbar">-->
-    <!--        <ul>-->
-    <!--            <li><a href="/"><span class="icon">🎮</span> Inicio</a></li>-->
-    <!--            <li><a href="/torneo"><span class="icon">🏆</span> Torneos</a></li>-->
-    <!--            <li><a href="/login"><span class="icon">🔑</span> Iniciar Sesión</a></li>-->
-    <!--            <li><a href="/registro"><span class="icon">✍️</span> Registrarse</a></li>-->
-    <!--        </ul>-->
-    <!--    </nav>-->
-
     <nav class="navbar bg-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" th:href="@{/}">Retro Gamer</a>
@@ -99,8 +89,11 @@
                     <div class="forms-container">
                         <div class="form-card p-4">
                             <!-- Mostrar mensaje de logout si el parámetro 'logout' está presente -->
-                            <div th:if="${param.logout}" class="alert alert-info text-center" role="alert">
+                            <div th:if="${param.logout}"
+                                 class="alert alert-info alert-dismissible fade show text-center" role="alert">
                                 Sesión cerrada exitosamente.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
                             </div>
                             <!-- Al hacer submit, se envían los datos a /login -->
                             <form id="login-form" th:action="@{/login}" th:object="${auth}" method="post">
@@ -113,13 +106,18 @@
                                     <input type="password" id="login-password" name="password" class="form-control"
                                            required>
                                 </div>
-                                <!-- Se muestra error si existe -->
-                                <div id="login-error" th:if="${error}" th:text="${error}"></div>
                                 <button type="submit" class="form-button btn btn-primary btn-block">Entrar</button>
+
+                                <div th:if="${mensajeError}"
+                                     class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                                    <span th:text="${mensajeError}"></span>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
                                 <!-- Sección adicional: enlaces -->
                                 <div class="d-flex justify-content-between mt-3">
-                                    <a href="/recuperar-contrasena" class="small">¿Olvidaste tu contraseña?</a>
-                                    <a href="/registro" class="btn btn-secondary btn-sm">Crear cuenta nueva</a>
+                                    <a th:href="@{/recuperar-contrasena}" class="small">¿Olvidaste tu contraseña?</a>
+                                    <a th:href="@{/registro}" class="btn btn-secondary btn-sm">Crear cuenta nueva</a>
                                 </div>
                             </form>
                         </div>

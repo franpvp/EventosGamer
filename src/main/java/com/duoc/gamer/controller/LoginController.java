@@ -61,9 +61,10 @@ public class LoginController {
         response.addCookie(cookie);
 
         // Verificar si el usuario tiene rol ADMIN para redirigirlo al template admin-home.html
-        boolean isAdmin = userDetails.getAuthorities().stream()
-                .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
-        if (isAdmin) {
+        boolean isAdminOrModerator = userDetails.getAuthorities().stream()
+                .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN") || auth.getAuthority().equals("ROLE_MODERATOR"));
+
+        if (isAdminOrModerator) {
             return "redirect:/admin-home";
         } else {
             return "redirect:/home";
