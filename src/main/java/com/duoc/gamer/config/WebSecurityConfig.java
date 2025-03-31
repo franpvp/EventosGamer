@@ -38,7 +38,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/", "/home", "/login", "/perfil", "/contacto", "/registro", "/favicon.ico",
                                 "/css/**", "/js/**", "/images/**", "/authenticate", "/recuperar-contrasena", "/admin-home", "/logout").permitAll()
-                        .requestMatchers("/torneo", "/gestion-usuarios", "gestion-eventos").authenticated()
+                        .requestMatchers("/torneo", "/gestion-usuarios", "/gestion-eventos").authenticated()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception

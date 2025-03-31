@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Registrarse - Torneo Retro Gamer 2025</title>
     <!-- Fuentes: Retro para títulos y Roboto para el contenido -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="stylesheet" href="/js/index.js" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+          crossorigin="anonymous">
+    <!-- Fuentes: Retro para títulos y Roboto para el contenido -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap"
+          rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" href="/js/index.js"/>
     <style>
         #registrarse h2 {
           text-align: center;
@@ -82,17 +87,56 @@
 </head>
 <body>
 <!-- Checkbox oculto para activar modo 8-bit -->
-<input type="checkbox" id="mode8bit" class="mode8bit-toggle" />
+<input type="checkbox" id="mode8bit" class="mode8bit-toggle"/>
 <div id="page">
-    <!-- Navbar -->
-    <nav class="navbar">
-        <ul>
-            <li><a href="/"><span class="icon">🎮</span> Inicio</a></li>
-            <li><a href="/torneo"><span class="icon">🏆</span> Torneos</a></li>
-            <li><a href="/login"><span class="icon">🔑</span> Iniciar Sesión</a></li>
-            <li><a href="/registro"><span class="icon">✍️</span> Registrarse</a></li>
-            <li><label for="mode8bit" class="toggle-8bit">🕹️ Modo 8 bits</label></li>
-        </ul>
+    <nav class="navbar bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">Retro Gamer</a>
+            <th:block sec:authorize="!isAuthenticated()">
+              <span class="navbar-text text-white ms-3">
+                Bienvenido, <span th:text="${#authentication.name}">Usuario</span>
+              </span>
+            </th:block>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                    aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                 aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/}">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/torneo}">Torneos</a>
+                        </li>
+                        <!-- Opciones para usuarios anónimos -->
+                        <th:block sec:authorize="!isAuthenticated()">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/login}">Iniciar Sesión</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/registro}">Registrarse</a>
+                            </li>
+                        </th:block>
+                        <!-- Opciones para usuarios autenticados -->
+                        <th:block sec:authorize="isAuthenticated()">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/perfil}">Perfil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/logout}">Cerrar Sesión</a>
+                            </li>
+                        </th:block>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </nav>
 
     <!-- Sección de Registro -->
@@ -128,12 +172,14 @@
                     <div class="form-group">
                         <label for="register-password">Contraseña:</label>
                         <input type="password" id="register-password" th:field="*{password}" required minlength="6">
-                        <i class="fa fa-eye toggle-password" id="toggle-password" onclick="togglePasswordVisibility('register-password', 'toggle-password')"></i>
+                        <i class="fa fa-eye toggle-password" id="toggle-password"
+                           onclick="togglePasswordVisibility('register-password', 'toggle-password')"></i>
                     </div>
                     <div class="form-group">
                         <label for="register-confirm-password">Confirmar Contraseña:</label>
                         <input type="password" id="register-confirm-password" required minlength="6">
-                        <i class="fa fa-eye toggle-password" id="toggle-confirm-password" onclick="togglePasswordVisibility('register-confirm-password', 'toggle-confirm-password')"></i>
+                        <i class="fa fa-eye toggle-password" id="toggle-confirm-password"
+                           onclick="togglePasswordVisibility('register-confirm-password', 'toggle-confirm-password')"></i>
                         <small id="password-error">Las contraseñas no coinciden.</small>
                     </div>
                     <!-- Los campos role, isLoggedIn y fechaCreacion se asignan automáticamente en el backend -->
@@ -148,43 +194,47 @@
         <p>&copy; 2025 Retro Gamer Tournament. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Bootstrap JS y dependencias (opcional) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-LtrjvnR4/J57+Cuom1Jfa2ZxFazJZAGPZVfW9L3R05T2D/c7yjhp+F9JB9N3duJ0"
-            crossorigin="anonymous"></script>
-    <script>
-        // Función para alternar la visibilidad de un input de contraseña
-        function togglePasswordVisibility(inputId, toggleIconId) {
-          var input = document.getElementById(inputId);
-          var icon = document.getElementById(toggleIconId);
-          if (input.type === "password") {
-            input.type = "text";
-            icon.classList.remove("fa-eye");
-            icon.classList.add("fa-eye-slash");
-          } else {
-            input.type = "password";
-            icon.classList.remove("fa-eye-slash");
-            icon.classList.add("fa-eye");
-          }
-        }
 
-        // Validación de coincidencia de contraseñas al enviar el formulario
-        document.getElementById('register-form').addEventListener('submit', function(event) {
-          var password = document.getElementById('register-password').value;
-          var confirmPassword = document.getElementById('register-confirm-password').value;
-          var errorMessage = document.getElementById('password-error');
-          if (password !== confirmPassword) {
-            event.preventDefault();
-            errorMessage.style.display = 'block';
-          } else {
-            errorMessage.style.display = 'none';
-          }
-        });
-    </script>
 </div>
+<!-- Bootstrap JS y dependencias (opcional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-LtrjvnR4/J57+Cuom1Jfa2ZxFazJZAGPZVfW9L3R05T2D/c7yjhp+F9JB9N3duJ0"
+        crossorigin="anonymous"></script>
+<script>
+    // Función para alternar la visibilidad de un input de contraseña
+    function togglePasswordVisibility(inputId, toggleIconId) {
+      var input = document.getElementById(inputId);
+      var icon = document.getElementById(toggleIconId);
+      if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+      } else {
+        input.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+      }
+    }
 
+    // Validación de coincidencia de contraseñas al enviar el formulario
+    document.getElementById('register-form').addEventListener('submit', function(event) {
+      var password = document.getElementById('register-password').value;
+      var confirmPassword = document.getElementById('register-confirm-password').value;
+      var errorMessage = document.getElementById('password-error');
+      if (password !== confirmPassword) {
+        event.preventDefault();
+        errorMessage.style.display = 'block';
+      } else {
+        errorMessage.style.display = 'none';
+      }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
 </body>
 </html>

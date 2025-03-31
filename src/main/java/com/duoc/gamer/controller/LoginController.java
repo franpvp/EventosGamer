@@ -52,6 +52,7 @@ public class LoginController {
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(authDTO.getEmail());
         String jwt = jwtTokenUtil.generateToken(userDetails);
 
+
         // Crear la cookie HttpOnly con el token
         Cookie cookie = new Cookie("JWT_TOKEN", jwt);
         cookie.setHttpOnly(true);

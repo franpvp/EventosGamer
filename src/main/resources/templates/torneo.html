@@ -108,7 +108,7 @@
                 <div class="card text-center">
                     <div class="card-img-container">
                         <!-- Puedes utilizar un campo de imagen (por ejemplo, evento.imagen) si lo tienes; de lo contrario, usa una imagen por defecto -->
-                        <img th:src="@{${evento.imagen} != null ? ${evento.imagen} : '/images/usuario-de-perfil.png'}"
+                        <img th:src="@{'/images/' + ${#strings.replace(evento.titulo.toLowerCase(), ' ', '-') } + '.png'}"
                              alt="Imagen del evento" class="img-fluid">
                     </div>
                     <div class="card-body">
@@ -116,11 +116,7 @@
                         <p class="card-text" th:text="${evento.descripcion}">Descripción del evento</p>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><strong>Fecha y Hora:</strong>
-                                <span th:text="${#dates.format(evento.fechaInicio, 'dd/MM/yyyy, HH:mm')}">Fecha y Hora</span>
-                            </li>
-                            <!-- Ubicación: Si la incluyes en tu entidad, muéstrala; de lo contrario, puedes omitirla -->
-                            <li class="list-group-item" th:if="${evento.ubicacion != null}">
-                                <strong>Ubicación:</strong> <span th:text="${evento.ubicacion}">Ubicación</span>
+                                <span th:text="${#temporals.format(evento.fechaInicio, 'dd/MM/yyyy, HH:mm')}">Fecha y Hora</span>
                             </li>
                             <li class="list-group-item"><strong>Organizadores:</strong> <span
                                     th:text="${evento.organizadores}">Organizadores</span></li>
@@ -141,66 +137,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Card Evento 2 -->
-            <!--            <div class="col-12 col-md-8 mx-auto mb-4">-->
-            <!--                <div class="card text-center">-->
-            <!--                    <div class="card-img-container">-->
-            <!--                        <img src="/images/marvel-rivals-evento.png" alt="Evento Retro 2" class="img-fluid">-->
-            <!--                    </div>-->
-            <!--                    <div class="card-body">-->
-            <!--                        <h5 class="card-title">Evento Rivals</h5>-->
-            <!--                        <p class="card-text">Pon a prueba tu destreza en competencias llenas de nostalgia y premios.</p>-->
-            <!--                        <ul class="list-group list-group-flush">-->
-            <!--                            <li class="list-group-item"><strong>Categoría:</strong> Competitivo</li>-->
-            <!--                            <li class="list-group-item"><strong>Fecha y Hora:</strong> 05/04/2025, 20:00</li>-->
-            <!--                            <li class="list-group-item"><strong>Ubicación:</strong> Auditorio Central, Ciudad ABC</li>-->
-            <!--                            <li class="list-group-item"><strong>Organizadores:</strong> Retro Sports Inc.</li>-->
-            <!--                            <li class="list-group-item"><strong>Servicios:</strong> Estacionamiento, Locomoción-->
-            <!--                                colectiva, Comidas-->
-            <!--                            </li>-->
-            <!--                            <li class="list-group-item"><strong>Expositores:</strong> Expositor X, Expositor Y,-->
-            <!--                                Expositor Z-->
-            <!--                            </li>-->
-            <!--                            <li class="list-group-item"><strong>Premios:</strong> Cupón, Trofeo y Reconocimientos.</li>-->
-            <!--                        </ul>-->
-            <!--                    </div>-->
-            <!--                    <div class="card-footer">-->
-            <!--                        <a href="/participar/evento2" class="btn participar-btn d-block mx-auto">Participar</a>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!-- Card Evento 3 -->
-            <!--            <div class="col-12 col-md-8 mx-auto mb-4">-->
-            <!--                <div class="card text-center">-->
-            <!--                    <div class="card-img-container">-->
-            <!--                        <img src="/images/overwatch2.jpg" alt="Overwatch 2" class="img-fluid">-->
-            <!--                    </div>-->
-            <!--                    <div class="card-body">-->
-            <!--                        <h5 class="card-title">Overwatch 2</h5>-->
-            <!--                        <p class="card-text">Sumérgete en una experiencia única y retro, y compite por increíbles-->
-            <!--                            premios.</p>-->
-            <!--                        <ul class="list-group list-group-flush">-->
-            <!--                            <li class="list-group-item"><strong>Categoría:</strong> Estrategia</li>-->
-            <!--                            <li class="list-group-item"><strong>Fecha y Hora:</strong> 12/04/2025, 19:00</li>-->
-            <!--                            <li class="list-group-item"><strong>Ubicación:</strong> Centro de Exposiciones, Ciudad LMN-->
-            <!--                            </li>-->
-            <!--                            <li class="list-group-item"><strong>Organizadores:</strong> Gaming Legends</li>-->
-            <!--                            <li class="list-group-item"><strong>Servicios:</strong> Estacionamiento, Comidas,-->
-            <!--                                Alojamiento-->
-            <!--                            </li>-->
-            <!--                            <li class="list-group-item"><strong>Expositores:</strong> Expositor 1, Expositor 2,-->
-            <!--                                Expositor 3-->
-            <!--                            </li>-->
-            <!--                            <li class="list-group-item"><strong>Premios:</strong> Medalla de Honor, Trofeo y sorpresas.-->
-            <!--                            </li>-->
-            <!--                        </ul>-->
-            <!--                    </div>-->
-            <!--                    <div class="card-footer">-->
-            <!--                        <a href="/participar/evento3" class="btn participar-btn d-block mx-auto">Participar</a>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!-- Más cards según tus necesidades -->
         </div>
     </section>
 </div>
