@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.CookieClearingLogoutHandler;
 
 
 @Configuration
@@ -34,18 +35,25 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        CookieClearingLogoutHandler cookieClearingLogoutHandler = new CookieClearingLogoutHandler("JWT_TOKEN");
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/", "/home", "/login", "/perfil", "/contacto", "/registro", "/favicon.ico",
-                                "/css/**", "/js/**", "/images/**", "/authenticate", "/recuperar-contrasena", "/admin-home", "/logout").permitAll()
-                        .requestMatchers("/torneo", "/gestion-usuarios", "/gestion-eventos").authenticated()
+                        .requestMatchers("/", "/home", "/login", "/contacto", "/registro", "/favicon.ico",
+                                "/css/**", "/js/**", "/images/**", "/authenticate", "/recuperar-contrasena").permitAll()
+                        .requestMatchers("/admin-home", "/gestion-usuarios", "/gestion-eventos").hasAnyRole("ADMIN", "MODERATOR")
+                        .requestMatchers("/torneo", "/perfil").authenticated()
                         .anyRequest().authenticated()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        // Se agrega el handler para limpiar la cookie al cerrar sesión
+                        .addLogoutHandler(cookieClearingLogoutHandler)
                 )
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 )
-
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         // Primero agregamos nuestro filtro para trasladar la cookie al header

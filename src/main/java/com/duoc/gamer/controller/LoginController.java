@@ -71,7 +71,6 @@ public class LoginController {
         }
     }
 
-
     @GetMapping("/logout")
     public String cerrarSesion(HttpServletResponse response) {
         Cookie cookie = new Cookie("JWT_TOKEN", null);
@@ -79,6 +78,6 @@ public class LoginController {
         cookie.setPath("/");
         cookie.setMaxAge(0); // La cookie se elimina de inmediato
         response.addCookie(cookie);
-        return "redirect:/login?logout"; // Redirige al login, opcionalmente con un mensaje
+        return "redirect:/login?logout";
     }
 }

@@ -21,7 +21,7 @@ public class InicializadorAdmin {
     @Bean
     public CommandLineRunner initAdmin(UsuarioRepository usuarioRepository, UsuarioMapper usuarioMapper, PasswordEncoder passwordEncoder) {
         return args -> {
-            if (usuarioRepository.findByEmail("admin@gmail.com") == null) {
+            if (usuarioRepository.findByEmail("admin@gmail.com").isEmpty()) {
                 // Construir el DTO para el admin
                 UsuarioDTO adminDTO = UsuarioDTO.builder()
                         .username("admin")
@@ -40,9 +40,6 @@ public class InicializadorAdmin {
                 adminEntity.setRole(UserRole.ADMIN);
                 usuarioRepository.save(adminEntity);
 
-                log.info("Usuario admin creado correctamente.");
-            } else {
-                log.info("El usuario admin ya existe.");
             }
         };
     }

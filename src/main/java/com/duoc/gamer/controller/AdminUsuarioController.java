@@ -71,7 +71,7 @@ public class AdminUsuarioController {
         Cookie cookie = new Cookie("JWT_TOKEN", jwt);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
-        cookie.setMaxAge(24 * 60 * 60); // Expiración: 1 día
+        cookie.setMaxAge(24 * 60 * 60);
         response.addCookie(cookie);
 
         // Encriptar la contraseña recibida del formulario

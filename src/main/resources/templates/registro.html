@@ -92,7 +92,7 @@
     <nav class="navbar bg-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" th:href="@{/}">Retro Gamer</a>
-            <th:block sec:authorize="!isAuthenticated()">
+            <th:block sec:authorize="isAuthenticated()">
               <span class="navbar-text text-white ms-3">
                 Bienvenido, <span th:text="${#authentication.name}">Usuario</span>
               </span>
