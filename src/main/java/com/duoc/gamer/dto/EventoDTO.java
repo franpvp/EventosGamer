@@ -2,8 +2,9 @@ package com.duoc.gamer.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Builder
@@ -23,7 +24,8 @@ public class EventoDTO {
     private String descripcion;
 
     @NotNull(message = "El campo fechaInicio no puede estar vacío")
-    private LocalDate fechaInicio;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime fechaInicio;
 
     @NotNull(message = "El campo organizadores no puede estar vacío")
     private String organizadores;

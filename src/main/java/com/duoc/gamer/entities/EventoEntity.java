@@ -3,7 +3,7 @@ package com.duoc.gamer.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Builder
@@ -26,7 +26,7 @@ public class EventoEntity {
     private String descripcion;
 
     @Column(name = "fecha_inicio", nullable = false)
-    private LocalDate fechaInicio;
+    private LocalDateTime fechaInicio;
 
     @Column(name = "organizadores", nullable = false, length = 50)
     private String organizadores;
