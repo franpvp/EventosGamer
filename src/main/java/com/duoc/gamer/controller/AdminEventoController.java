@@ -46,21 +46,20 @@ public class AdminEventoController {
     @PostMapping("/gestion-eventos")
     public String processEvento(
             @Valid @ModelAttribute("nuevoEvento") EventoDTO nuevoEvento,
+            BindingResult result,
             @AuthenticationPrincipal UserDetails userDetails,
-            HttpServletResponse response,
-            BindingResult result
+            HttpServletResponse response
     ) {
         if (result.hasErrors()) {
-            log.error("Error validaciones");
+            log.error("Error en validaciones");
             return "gestion-eventos";
         }
 
         String jwt = jwtTokenUtil.generateToken(userDetails);
-
         Cookie cookie = new Cookie("JWT_TOKEN", jwt);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
-        cookie.setMaxAge(24 * 60 * 60); // Expiración: 1 día
+        cookie.setMaxAge(24 * 60 * 60); // 1 día
         response.addCookie(cookie);
 
         eventoService.crearEvento(nuevoEvento);

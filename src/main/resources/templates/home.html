@@ -104,25 +104,44 @@
             <div class="champion">🏆 Ganador: <span class="winner">Jugador 2</span></div>
         </div>
 
-        <!-- Registro de Torneos (opcional en Home) -->
+        <!-- Registro de Torneos -->
         <h3>¿Quieres registrar un torneo?</h3>
         <div class="forms-container">
             <div class="form-card">
-                <form id="tournament-form">
+                <form th:action="@{/home}" method="post" th:object="${nuevoEvento}" id="evento-form">
                     <div class="form-group">
-                        <label for="tournament-name">Nombre del Torneo:</label>
-                        <input type="text" id="tournament-name" name="tournament-name" required>
+                        <label for="titulo">Título:</label>
+                        <input type="text" id="titulo" th:field="*{titulo}" placeholder="Nombre del Evento" required>
                     </div>
                     <div class="form-group">
-                        <label for="tournament-date">Fecha:</label>
-                        <input type="date" id="tournament-date" name="tournament-date" required>
+                        <label for="descripcion">Descripción:</label>
+                        <input type="text" id="descripcion" th:field="*{descripcion}" placeholder="Descripción breve"
+                               required>
                     </div>
                     <div class="form-group">
-                        <label for="tournament-description">Descripción:</label>
-                        <textarea id="tournament-description" name="tournament-description" rows="3"
-                                  required></textarea>
+                        <label for="fechaInicio">Fecha y Hora de Inicio:</label>
+                        <input type="datetime-local" id="fechaInicio" th:field="*{fechaInicio}" required>
                     </div>
-                    <button type="submit" class="form-button">Registrar Torneo</button>
+                    <div class="form-group">
+                        <label for="organizadores">Organizadores:</label>
+                        <input type="text" id="organizadores" th:field="*{organizadores}"
+                               placeholder="Nombre de organizadores" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="servicios">Servicios:</label>
+                        <input type="text" id="servicios" th:field="*{servicios}" placeholder="Servicios incluidos"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expositores">Expositores:</label>
+                        <input type="text" id="expositores" th:field="*{expositores}" placeholder="Lista de expositores"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label for="premios">Premios:</label>
+                        <input type="text" id="premios" th:field="*{premios}" placeholder="Premios a entregar" required>
+                    </div>
+                    <button type="submit" class="form-button">Registrar Evento</button>
                 </form>
             </div>
         </div>

@@ -106,7 +106,6 @@
             <div class="col-12 col-md-8 mx-auto mb-4" th:each="evento : ${eventos}">
                 <div class="card text-center">
                     <div class="card-img-container">
-                        <!-- Puedes utilizar un campo de imagen (por ejemplo, evento.imagen) si lo tienes; de lo contrario, usa una imagen por defecto -->
                         <img th:src="@{'/images/' + ${#strings.replace(evento.titulo.toLowerCase(), ' ', '-') } + '.png'}"
                              alt="Imagen del evento" class="img-fluid">
                     </div>

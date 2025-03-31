@@ -21,6 +21,10 @@ public class EventoMapper {
     }
 
     public EventoEntity eventoDtoToEntity(EventoDTO eventoDTO) {
+        if (eventoDTO == null) {
+            return null;
+        }
+
         return EventoEntity.builder()
                 .idEvento(eventoDTO.getIdEvento())
                 .titulo(eventoDTO.getTitulo())
