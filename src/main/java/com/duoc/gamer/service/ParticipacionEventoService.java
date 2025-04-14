@@ -15,7 +15,5 @@ public interface ParticipacionEventoService {
 
     ParticipacionEventoDTO modificarParticipacionEventos(ParticipacionEventoDTO participacionEventoDTO);
 
-    void eliminarParticipacionEventosById(Long id);
-
     void registrarParticipacion(Long idUsuario, Long idEvento, LocalDate fechaInscripcion);
 }

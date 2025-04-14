@@ -40,11 +40,6 @@ public class ParticipacionEventoServiceImpl implements ParticipacionEventoServic
     }
 
     @Override
-    public void eliminarParticipacionEventosById(Long id) {
-
-    }
-
-    @Override
     public void registrarParticipacion(Long idUsuario, Long idEvento, LocalDate fechaInscripcion) {
         ParticipacionEventoEntity participacion = new ParticipacionEventoEntity();
         participacion.setIdUsuario(idUsuario);

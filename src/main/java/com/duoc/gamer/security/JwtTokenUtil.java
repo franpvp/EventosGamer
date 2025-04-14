@@ -3,6 +3,7 @@ package com.duoc.gamer.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +16,11 @@ import java.util.function.Function;
 public class JwtTokenUtil {
 
     // Clave secreta para firmar el token. Debe guardarse de forma segura.
-    private final String SECRET_KEY = "tu_clave_secreta";
+    @Value("${secret_key}")
+    private String secretKey;
 
-    // Expiración del token (por ejemplo, 10 horas)
-    private final long JWT_TOKEN_VALIDITY = 10 * 60 * 60 * 1000;
+    // Expiracion del token
+    private static final long JWT_TOKEN_VALIDITY = (long) 10 * 60 * 60 * 1000;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -35,7 +37,7 @@ public class JwtTokenUtil {
 
     private Claims extractAllClaims(String token) {
         return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
+                .setSigningKey(secretKey)
                 .parseClaimsJws(token)
                 .getBody();
     }
@@ -55,7 +57,7 @@ public class JwtTokenUtil {
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
 

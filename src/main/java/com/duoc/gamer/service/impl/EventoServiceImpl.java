@@ -2,6 +2,7 @@ package com.duoc.gamer.service.impl;
 
 import com.duoc.gamer.dto.EventoDTO;
 import com.duoc.gamer.entities.EventoEntity;
+import com.duoc.gamer.exceptions.EventoNotFoundException;
 import com.duoc.gamer.mapper.EventoMapper;
 import com.duoc.gamer.repository.EventosRepository;
 import com.duoc.gamer.service.EventoService;
@@ -46,10 +47,7 @@ public class EventoServiceImpl implements EventoService {
 
     @Override
     public EventoDTO modificarEvento(EventoDTO eventoDTO) {
-        // Verificamos que el evento exista
-        EventoEntity eventoExistente = eventosRepository.findById(eventoDTO.getIdEvento())
-                .orElseThrow(() -> new RuntimeException("Evento no encontrado con id: " + eventoDTO.getIdEvento()));
-        // Mapeamos el DTO a entidad (puedes optar por actualizar manualmente los campos si lo requieres)
+        // Mapeamos el DTO a entidad
         EventoEntity eventoAActualizar = eventoMapper.eventoDtoToEntity(eventoDTO);
         EventoEntity eventoActualizado = eventosRepository.save(eventoAActualizar);
         return eventoMapper.eventoEntityToDto(eventoActualizado);
@@ -58,7 +56,7 @@ public class EventoServiceImpl implements EventoService {
     @Override
     public void eliminarEventoById(Long id) {
         if (!eventosRepository.existsById(id)) {
-            throw new RuntimeException("Evento no encontrado con id: " + id);
+            throw new EventoNotFoundException("Evento no encontrado con id: " + id);
         }
         eventosRepository.deleteById(id);
     }

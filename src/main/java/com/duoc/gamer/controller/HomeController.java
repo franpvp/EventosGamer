@@ -3,6 +3,7 @@ package com.duoc.gamer.controller;
 import com.duoc.gamer.dto.EventoDTO;
 import com.duoc.gamer.security.JwtTokenUtil;
 import com.duoc.gamer.service.EventoService;
+import com.duoc.gamer.util.JwtCookieUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -22,24 +23,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HomeController {
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private final JwtTokenUtil jwtTokenUtil;
+
+    private final EventoService eventoService;
 
     @Autowired
-    private EventoService eventoService;
-
-    @GetMapping("/home")
-    public String home(
-            @RequestParam(name = "name", required = false, defaultValue = "Gamer Website") String name,
-            Model model
-    ) {
-        model.addAttribute("name", name);
-        model.addAttribute("nuevoEvento", new EventoDTO());
-        return "home";
+    public HomeController(JwtTokenUtil jwtTokenUtil, EventoService eventoService) {
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.eventoService = eventoService;
     }
 
-    @GetMapping("/")
-    public String root(
+    @GetMapping({"/", "/home"})
+    public String home(
             @RequestParam(name = "name", required = false, defaultValue = "Gamer Website") String name,
             Model model
     ) {
@@ -59,12 +54,8 @@ public class HomeController {
             log.error("Error en validaciones");
             return "home";
         }
-
         String jwt = jwtTokenUtil.generateToken(userDetails);
-        Cookie cookie = new Cookie("JWT_TOKEN", jwt);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(24 * 60 * 60); // 1 día
+        Cookie cookie = JwtCookieUtil.crearCookieJWT(jwt);
         response.addCookie(cookie);
 
         eventoService.crearEvento(nuevoEvento);

@@ -1,13 +1,12 @@
 package com.duoc.gamer.controller;
 
 import com.duoc.gamer.dto.UsuarioDTO;
-import com.duoc.gamer.mapper.UsuarioMapper;
 import com.duoc.gamer.security.JwtTokenUtil;
 import com.duoc.gamer.service.UsuarioService;
+import com.duoc.gamer.util.JwtCookieUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,22 +23,19 @@ import java.util.List;
 
 @Controller
 @Slf4j
-@RequiredArgsConstructor
 public class AdminUsuarioController {
 
-    @Autowired
-    private UsuarioService usuarioService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private UsuarioMapper usuarioMapper;
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private final UsuarioService usuarioService;
 
-    public AdminUsuarioController(UsuarioService usuarioService, PasswordEncoder passwordEncoder, UsuarioMapper usuarioMapper) {
+    private final PasswordEncoder passwordEncoder;
+
+    private final JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    public AdminUsuarioController(UsuarioService usuarioService, PasswordEncoder passwordEncoder, JwtTokenUtil jwtTokenUtil) {
         this.usuarioService = usuarioService;
         this.passwordEncoder = passwordEncoder;
-        this.usuarioMapper = usuarioMapper;
+        this.jwtTokenUtil = jwtTokenUtil;
     }
 
     // Muestra el listado de usuarios y el formulario para agregar un nuevo usuario
@@ -64,14 +60,8 @@ public class AdminUsuarioController {
             return "gestion-usuarios";
         }
 
-        // Generar token JWT utilizando el userDetails del usuario autenticado (por ejemplo, el admin)
         String jwt = jwtTokenUtil.generateToken(userDetails);
-
-        // Crear la cookie HttpOnly con el token
-        Cookie cookie = new Cookie("JWT_TOKEN", jwt);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(24 * 60 * 60);
+        Cookie cookie = JwtCookieUtil.crearCookieJWT(jwt);
         response.addCookie(cookie);
 
         // Encriptar la contraseña recibida del formulario
@@ -80,7 +70,6 @@ public class AdminUsuarioController {
 
         // Guardar el nuevo usuario en la base de datos usando el service
         usuarioService.createUsuario(nuevoUsuario);
-
         return "redirect:/gestion-usuarios"; // Redirige al listado actualizado
     }
 

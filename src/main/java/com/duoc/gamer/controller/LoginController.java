@@ -20,14 +20,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class LoginController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+
+    private final CustomUserDetailsService customUserDetailsService;
+
+    private final JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private CustomUserDetailsService customUserDetailsService;
-
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    public LoginController(AuthenticationManager authenticationManager, CustomUserDetailsService customUserDetailsService, JwtTokenUtil jwtTokenUtil) {
+        this.authenticationManager = authenticationManager;
+        this.customUserDetailsService = customUserDetailsService;
+        this.jwtTokenUtil = jwtTokenUtil;
+    }
 
     // Muestra la vista de login
     @GetMapping("/login")
@@ -55,6 +59,7 @@ public class LoginController {
 
         // Crear la cookie HttpOnly con el token
         Cookie cookie = new Cookie("JWT_TOKEN", jwt);
+        cookie.setSecure(true);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         cookie.setMaxAge(24 * 60 * 60);// Expiración: 1 día
@@ -74,6 +79,7 @@ public class LoginController {
     @GetMapping("/logout")
     public String cerrarSesion(HttpServletResponse response) {
         Cookie cookie = new Cookie("JWT_TOKEN", null);
+        cookie.setSecure(true);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         cookie.setMaxAge(0); // La cookie se elimina de inmediato

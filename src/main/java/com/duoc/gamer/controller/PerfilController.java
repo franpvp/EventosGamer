@@ -19,12 +19,16 @@ public class PerfilController {
 
     @GetMapping("/perfil")
     public String showPerfilPage(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-        if (userDetails != null) {
-            model.addAttribute("username", userDetails.getUsername());
+        if (userDetails == null || userDetails.getUsername() == null) {
+            return "redirect:/login";
         }
+
         String username = userDetails.getUsername();
+        model.addAttribute("username", username);
+
         UsuarioDTO usuario = usuarioService.findByEmail(username);
         model.addAttribute("usuario", usuario);
+
         return "perfil";
     }
 }

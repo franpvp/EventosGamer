@@ -3,6 +3,7 @@ package com.duoc.gamer.controller;
 import com.duoc.gamer.dto.EventoDTO;
 import com.duoc.gamer.security.JwtTokenUtil;
 import com.duoc.gamer.service.EventoService;
+import com.duoc.gamer.util.JwtCookieUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -25,11 +26,12 @@ public class AdminEventoController {
 
     private final EventoService eventoService;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private final JwtTokenUtil jwtTokenUtil;
 
-    public AdminEventoController(EventoService eventoService) {
+    @Autowired
+    public AdminEventoController(EventoService eventoService, JwtTokenUtil jwtTokenUtil) {
         this.eventoService = eventoService;
+        this.jwtTokenUtil = jwtTokenUtil;
     }
 
     // Este método carga la vista de "Participa en Eventos"
@@ -56,15 +58,11 @@ public class AdminEventoController {
         }
 
         String jwt = jwtTokenUtil.generateToken(userDetails);
-        Cookie cookie = new Cookie("JWT_TOKEN", jwt);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(24 * 60 * 60); // 1 día
+        Cookie cookie = JwtCookieUtil.crearCookieJWT(jwt);
         response.addCookie(cookie);
 
         eventoService.crearEvento(nuevoEvento);
         return "redirect:/gestion-eventos";
     }
-
 
 }
