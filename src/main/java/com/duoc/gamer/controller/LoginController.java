@@ -3,6 +3,7 @@ package com.duoc.gamer.controller;
 import com.duoc.gamer.dto.AuthDTO;
 import com.duoc.gamer.security.JwtTokenUtil;
 import com.duoc.gamer.service.impl.CustomUserDetailsService;
+import com.duoc.gamer.util.JwtCookieUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,13 +57,7 @@ public class LoginController {
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(authDTO.getEmail());
         String jwt = jwtTokenUtil.generateToken(userDetails);
 
-
-        // Crear la cookie HttpOnly con el token
-        Cookie cookie = new Cookie("JWT_TOKEN", jwt);
-        cookie.setSecure(true);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(24 * 60 * 60);// Expiración: 1 día
+        Cookie cookie = JwtCookieUtil.crearCookieJWT(jwt);
         response.addCookie(cookie);
 
         // Verificar si el usuario tiene rol ADMIN para redirigirlo al template admin-home.html
@@ -82,7 +77,7 @@ public class LoginController {
         cookie.setSecure(true);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
-        cookie.setMaxAge(0); // La cookie se elimina de inmediato
+        cookie.setMaxAge(0); // La cookie se elimina
         response.addCookie(cookie);
         return "redirect:/login?logout";
     }

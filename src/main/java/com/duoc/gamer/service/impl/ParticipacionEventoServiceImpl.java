@@ -44,7 +44,7 @@ public class ParticipacionEventoServiceImpl implements ParticipacionEventoServic
         ParticipacionEventoEntity participacion = new ParticipacionEventoEntity();
         participacion.setIdUsuario(idUsuario);
         participacion.setIdEvento(idEvento);
-        // Convertir LocalDate a java.sql.Date (o usar LocalDate directamente si tu entidad está preparada para ello)
+
         participacion.setFechaInscripcion(Date.valueOf(fechaInscripcion).toLocalDate());
 
         participacionEventoRepository.save(participacion);

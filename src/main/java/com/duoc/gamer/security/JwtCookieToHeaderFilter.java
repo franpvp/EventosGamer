@@ -14,7 +14,7 @@ public class JwtCookieToHeaderFilter extends OncePerRequestFilter {
     private static final String AUTHORIZATION = "Authorization";
 
     @Override
-    protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain) throws jakarta.servlet.ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain) throws jakarta.servlet.ServletException, IOException {
         // Verifica si el header Authorization ya existe
         String authHeader = request.getHeader(AUTHORIZATION);
         if ((authHeader == null || authHeader.isEmpty()) && request.getCookies() != null) {
