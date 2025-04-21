@@ -31,6 +31,12 @@ import static org.mockito.Mockito.*;
 class LoginControllerTest {
 
     @Mock
+    private HttpServletResponse response;
+
+    @Mock
+    private Model model;
+
+    @Mock
     private AuthenticationManager authenticationManager;
 
     @Mock
@@ -42,13 +48,19 @@ class LoginControllerTest {
     @InjectMocks
     private LoginController loginController;
 
-    private HttpServletResponse response;
-    private Model model;
 
     @BeforeEach
     void setUp() {
-        response = mock(HttpServletResponse.class);
-        model = mock(Model.class);
+    }
+
+
+    @Test
+    public void showLoginPageTest() {
+
+        String resultado = loginController.showLoginPage(model);
+
+        assertNotNull(resultado);
+        assertEquals("login", resultado);
     }
 
     @Test
@@ -114,5 +126,14 @@ class LoginControllerTest {
         // Assert
         assertEquals("login", resultado);
         verify(model).addAttribute("mensajeError", "Correo o contraseña incorrectos");
+    }
+
+    @Test
+    public void cerrarSesionTest() {
+
+        String resultado = loginController.cerrarSesion(response);
+
+        assertNotNull(resultado);
+        assertEquals("redirect:/login?logout", resultado);
     }
 }
