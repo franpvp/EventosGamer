@@ -2,41 +2,45 @@ package com.duoc.gamer.service.impl;
 
 import com.duoc.gamer.dto.ParticipacionEventoDTO;
 import com.duoc.gamer.entities.ParticipacionEventoEntity;
+import com.duoc.gamer.mapper.ParticipacionEventoMapper;
 import com.duoc.gamer.repository.ParticipacionEventoRepository;
 import com.duoc.gamer.service.ParticipacionEventoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ParticipacionEventoServiceImpl implements ParticipacionEventoService {
 
     private final ParticipacionEventoRepository participacionEventoRepository;
+    private final ParticipacionEventoMapper participacionEventoMapper;
 
-    public ParticipacionEventoServiceImpl(ParticipacionEventoRepository participacionEventoRepository) {
+    @Autowired
+    public ParticipacionEventoServiceImpl(ParticipacionEventoRepository participacionEventoRepository, ParticipacionEventoMapper participacionEventoMapper) {
         this.participacionEventoRepository = participacionEventoRepository;
+        this.participacionEventoMapper = participacionEventoMapper;
     }
 
     @Override
     public List<ParticipacionEventoDTO> getParticipacionEventos() {
-        return List.of();
+
+        List<ParticipacionEventoEntity> participacionEventoDTOList = participacionEventoRepository.findAll();
+
+        return participacionEventoDTOList.stream()
+                .map(participacionEventoMapper::participacionEventoEntityToDto).toList();
     }
 
     @Override
     public ParticipacionEventoDTO getParticipacionEventosById(Long id) {
-        return null;
-    }
 
-    @Override
-    public ParticipacionEventoDTO crearParticipacionEvento(ParticipacionEventoDTO participacionEventoDTO) {
-        return null;
-    }
-
-    @Override
-    public ParticipacionEventoDTO modificarParticipacionEventos(ParticipacionEventoDTO participacionEventoDTO) {
-        return null;
+        return participacionEventoRepository.findById(id).stream()
+                .map(participacionEventoMapper::participacionEventoEntityToDto)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Participación no encontrada con id: " + id));
     }
 
     @Override

@@ -11,9 +11,5 @@ public interface ParticipacionEventoService {
 
     ParticipacionEventoDTO getParticipacionEventosById(Long id);
 
-    ParticipacionEventoDTO crearParticipacionEvento(ParticipacionEventoDTO participacionEventoDTO);
-
-    ParticipacionEventoDTO modificarParticipacionEventos(ParticipacionEventoDTO participacionEventoDTO);
-
     void registrarParticipacion(Long idUsuario, Long idEvento, LocalDate fechaInscripcion);
 }

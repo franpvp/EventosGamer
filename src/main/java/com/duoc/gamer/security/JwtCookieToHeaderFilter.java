@@ -1,8 +1,11 @@
 package com.duoc.gamer.security;
 
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -14,7 +17,7 @@ public class JwtCookieToHeaderFilter extends OncePerRequestFilter {
     private static final String AUTHORIZATION = "Authorization";
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain) throws jakarta.servlet.ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // Verifica si el header Authorization ya existe
         String authHeader = request.getHeader(AUTHORIZATION);
         if ((authHeader == null || authHeader.isEmpty()) && request.getCookies() != null) {

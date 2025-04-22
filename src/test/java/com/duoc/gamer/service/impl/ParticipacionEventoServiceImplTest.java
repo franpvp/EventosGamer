@@ -2,6 +2,7 @@ package com.duoc.gamer.service.impl;
 
 import com.duoc.gamer.dto.ParticipacionEventoDTO;
 import com.duoc.gamer.entities.ParticipacionEventoEntity;
+import com.duoc.gamer.mapper.ParticipacionEventoMapper;
 import com.duoc.gamer.repository.ParticipacionEventoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -28,6 +30,9 @@ class ParticipacionEventoServiceImplTest {
     private ParticipacionEventoEntity participacionEventoEntity;
 
     private ParticipacionEventoDTO participacionEventoDTO;
+
+    @Mock
+    private ParticipacionEventoMapper participacionEventoMapper;
 
     @Mock
     private ParticipacionEventoRepository participacionEventoRepository;
@@ -52,11 +57,41 @@ class ParticipacionEventoServiceImplTest {
     }
 
     @Test
-    void registrarParticipacion() {
+    public void getParticipacionEventosTest() {
+
+        when(participacionEventoMapper.participacionEventoEntityToDto(participacionEventoEntity)).thenReturn(participacionEventoDTO);
+        when(participacionEventoRepository.findAll()).thenReturn(List.of(participacionEventoEntity));
+
+        List<ParticipacionEventoDTO> resultado = participacionEventoService.getParticipacionEventos();
+
+        assertNotNull(resultado);
+
+        verify(participacionEventoMapper, times(1)).participacionEventoEntityToDto(participacionEventoEntity);
+        verify(participacionEventoRepository, times(1)).findAll();
+
+    }
+
+    @Test
+    public void getParticipacionEventosByIdTest() {
+
+        when(participacionEventoMapper.participacionEventoEntityToDto(participacionEventoEntity)).thenReturn(participacionEventoDTO);
+        when(participacionEventoRepository.findById(anyLong())).thenReturn(Optional.of(participacionEventoEntity));
+
+        ParticipacionEventoDTO resultado = participacionEventoService.getParticipacionEventosById(1L);
+
+        assertNotNull(resultado);
+
+        verify(participacionEventoMapper, times(1)).participacionEventoEntityToDto(participacionEventoEntity);
+        verify(participacionEventoRepository, times(1)).findById(1L);
+
+    }
+
+    @Test
+    public void registrarParticipacionTest() {
+
+        when(participacionEventoRepository.save(any(ParticipacionEventoEntity.class))).thenReturn(participacionEventoEntity);
 
         participacionEventoService.registrarParticipacion(ID_USUARIO, ID_EVENTO, FECHA_INSCRIPCION);
-
-        //verify(participacionEventoRepository, times(1)).save(participacionEventoEntity);
 
     }
 }
