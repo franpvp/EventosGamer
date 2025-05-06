@@ -38,6 +38,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         CookieClearingLogoutHandler cookieClearingLogoutHandler = new CookieClearingLogoutHandler("JWT_TOKEN");
         http
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/", "/home", "/login", "/contacto", "/registro", "/favicon.ico",
                                 "/css/**", "/js/**", "/images/**", "/authenticate", "/recuperar-contrasena").permitAll()
