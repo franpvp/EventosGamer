@@ -1,6 +1,7 @@
 package com.duoc.gamer.controller;
 
 import com.duoc.gamer.dto.UsuarioDTO;
+import com.duoc.gamer.enums.UserRole;
 import com.duoc.gamer.security.JwtTokenUtil;
 import com.duoc.gamer.service.UsuarioService;
 import com.duoc.gamer.util.JwtCookieUtil;

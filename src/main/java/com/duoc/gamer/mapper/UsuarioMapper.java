@@ -13,11 +13,11 @@ public class UsuarioMapper {
                 .username(usuarioEntity.getUsername())
                 .password(usuarioEntity.getPassword())
                 .email(usuarioEntity.getEmail())
-                .role(usuarioEntity.getRole())
                 .nombre(usuarioEntity.getNombre())
                 .apellidoPaterno(usuarioEntity.getApellidoPaterno())
                 .apellidoMaterno(usuarioEntity.getApellidoMaterno())
                 .fechaNacimiento(usuarioEntity.getFechaNacimiento())
+                .role(usuarioEntity.getRole())
                 .build();
     }
 
@@ -26,11 +26,11 @@ public class UsuarioMapper {
                 .username(usuarioDTO.getUsername())
                 .password(usuarioDTO.getPassword())
                 .email(usuarioDTO.getEmail())
-                .role(usuarioDTO.getRole())
                 .nombre(usuarioDTO.getNombre())
                 .apellidoPaterno(usuarioDTO.getApellidoPaterno())
                 .apellidoMaterno(usuarioDTO.getApellidoMaterno())
                 .fechaNacimiento(usuarioDTO.getFechaNacimiento())
+                .role(usuarioDTO.getRole())
                 .build();
     }
 }

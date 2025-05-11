@@ -88,7 +88,7 @@ class AdminUsuarioControllerTest {
     @Test
     public void agregarUsuarioTest() {
 
-        String resultado = adminUsuarioController.agregarUsuario(usuarioDTO, userDetails, bindingResult, httpServletResponse);
+        String resultado = adminUsuarioController.agregarUsuario(usuarioDTO, userDetails,bindingResult, httpServletResponse);
 
         assertNotNull(resultado);
 

@@ -15,7 +15,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/mydb  # URL de conexión a la base de datos MySQL
       - SPRING_DATASOURCE_USERNAME=root  # Usuario para la conexión a MySQL
       - SPRING_DATASOURCE_PASSWORD=rootpassword  # Contraseña para la conexión a MySQL
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update  # Configura Hibernate para manejar el esquema de la base de datos
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none  # Configura Hibernate para manejar el esquema de la base de datos
 
   # Servicio para la base de datos MySQL
   db:
