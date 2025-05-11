@@ -27,10 +27,6 @@ class ParticipacionEventoMapperTest {
     @InjectMocks
     private ParticipacionEventoMapper participacionEventoMapper;
 
-    @BeforeEach
-    void setUp() {
-    }
-
     @Test
     void participacionEventoEntityToDto() {
 

@@ -14,10 +14,6 @@ class RecuperarContrasenaControllerTest {
     @InjectMocks
     private RecuperarContrasenaController recuperarContrasenaController;
 
-    @BeforeEach
-    void setUp() {
-    }
-
     @Test
     void showRecuperarContrasenaPage() {
 

@@ -12,7 +12,7 @@ class EventoDTOTest {
     private static final Long ID_EVENTO = 1L;
     private static final String TITULO = "TITULO";
     private static final String DESCRIPCION = "DESCRIPCION";
-    private static final LocalDateTime FECHA_INICIO = LocalDateTime.of(2025, 12, 12, 12, 0);;
+    private static final LocalDateTime FECHA_INICIO = LocalDateTime.of(2025, 12, 12, 12, 0);
     private static final String ORGANIZADORES = "ORGANIZADORES";
     private static final String SERVICIOS = "SERVICIOS";
     private static final String EXPOSITORES = "EXPOSITORES";

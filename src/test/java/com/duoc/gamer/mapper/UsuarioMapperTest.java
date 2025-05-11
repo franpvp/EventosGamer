@@ -36,10 +36,6 @@ class UsuarioMapperTest {
     @InjectMocks
     private UsuarioMapper usuarioMapper;
 
-    @BeforeEach
-    void setUp() {
-    }
-
     @Test
     void usuarioEntityToDto() {
 

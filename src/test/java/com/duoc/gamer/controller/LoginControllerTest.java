@@ -48,12 +48,6 @@ class LoginControllerTest {
     @InjectMocks
     private LoginController loginController;
 
-
-    @BeforeEach
-    void setUp() {
-    }
-
-
     @Test
     public void showLoginPageTest() {
 

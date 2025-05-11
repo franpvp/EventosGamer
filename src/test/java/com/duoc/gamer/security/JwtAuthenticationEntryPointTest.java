@@ -32,10 +32,6 @@ class JwtAuthenticationEntryPointTest {
     @InjectMocks
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    @BeforeEach
-    void setUp() {
-    }
-
     @Test
     void commence() throws IOException {
 

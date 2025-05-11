@@ -47,10 +47,6 @@ class AdminEventoControllerTest {
     @InjectMocks
     private AdminEventoController adminEventoController;
 
-    @BeforeEach
-    void setUp() {
-    }
-
     @Test
     void mostrarEventosTest() {
 

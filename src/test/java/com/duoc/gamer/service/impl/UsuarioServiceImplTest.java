@@ -25,7 +25,6 @@ class UsuarioServiceImplTest {
 
     private static final Long ID = 1L;
     private static final Long ID_NEGATIVO = -1L;
-    private static final String USERNAME = "USERNAME";
     private static final String EMAIL = "test@gmail.com";
 
     private UsuarioEntity usuarioEntity;

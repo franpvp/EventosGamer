@@ -14,10 +14,6 @@ class HomeAdminControllerTest {
     @InjectMocks
     private HomeAdminController homeAdminController;
 
-    @BeforeEach
-    void setUp() {
-    }
-
     @Test
     public void showHomeAdminPage() {
 

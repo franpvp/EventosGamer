@@ -43,10 +43,6 @@ class HomeControllerTest {
     @InjectMocks
     private HomeController homeController;
 
-    @BeforeEach
-    void setUp() {
-    }
-
     @Test
     void homeTest() {
 

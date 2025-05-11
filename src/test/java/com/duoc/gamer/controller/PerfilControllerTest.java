@@ -17,10 +17,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class PerfilControllerTest {
 
-    private static final Long ID = 1L;
     private static final String USERNAME = "USERNAME";
-
-    private UsuarioDTO usuarioDTO;
 
     @Mock
     private Model model;
@@ -33,15 +30,6 @@ class PerfilControllerTest {
 
     @InjectMocks
     private PerfilController perfilController;
-
-    @BeforeEach
-    void setUp() {
-
-        usuarioDTO = UsuarioDTO.builder()
-                .id(ID)
-                .username(USERNAME)
-                .build();
-    }
 
     @Test
     public void showPerfilPageTest() {

@@ -4,7 +4,6 @@ import com.duoc.gamer.dto.UsuarioDTO;
 import com.duoc.gamer.service.EventoService;
 import com.duoc.gamer.service.ParticipacionEventoService;
 import com.duoc.gamer.service.UsuarioService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -48,11 +47,6 @@ class TorneoControllerTest {
 
     @InjectMocks
     private TorneoController torneoController;
-
-    @BeforeEach
-    void setUp() {
-
-    }
 
     @Test
     public void showTorneoPage() {

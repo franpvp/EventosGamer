@@ -32,12 +32,6 @@ class EventoMapperTest {
     @InjectMocks
     private EventoMapper eventoMapper;
 
-    @BeforeEach
-    void setUp() {
-
-
-    }
-
     @Test
     public void eventoEntityToDtoTest() {
 

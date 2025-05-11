@@ -27,8 +27,6 @@ class InicializadorAdminTest {
 
     private UsuarioEntity usuarioEntity;
 
-    private UsuarioDTO usuarioDTO;
-
     @Mock
     private UsuarioRepository usuarioRepository;
 
@@ -50,15 +48,6 @@ class InicializadorAdminTest {
                 .email("admin@gmail.com")
                 .build();
 
-        usuarioDTO = UsuarioDTO.builder()
-                .username("admin")
-                .email("admin@gmail.com")
-                .nombre("Administrador")
-                .apellidoPaterno("Default")
-                .apellidoMaterno("Default")
-                .fechaNacimiento(LocalDate.of(2000, 1, 1))
-                .password("admin")
-                .build();
     }
 
     @Test

@@ -18,10 +18,6 @@ class ContactoControllerTest {
     @InjectMocks
     private ContactoController contactoController;
 
-    @BeforeEach
-    void setUp() {
-    }
-
     @Test
     void mostrarFormulario() {
 

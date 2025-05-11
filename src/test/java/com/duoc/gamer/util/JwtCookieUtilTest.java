@@ -22,11 +22,6 @@ class JwtCookieUtilTest {
     @InjectMocks
     private JwtCookieUtil jwtCookieUtil;
 
-    @BeforeEach
-    void setUp() {
-
-    }
-
     @Test
     void crearCookieJWT() {
 
