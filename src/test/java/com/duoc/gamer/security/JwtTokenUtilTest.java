@@ -2,7 +2,7 @@ package com.duoc.gamer.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Date;
 
@@ -22,7 +23,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class JwtTokenUtilTest {
 
     private JwtTokenUtil jwtTokenUtil;
-    private String secretKey = "clave_secreta_prueba";
+    //private String secretKey = "clave_secreta_prueba";
+    private String secretKey = "c2VjcmV0X2tleV9mb3JfdGVzdGluZ19wdXJwb3Nlc19vbmx5";
 
     private UserDetails userDetails;
 
@@ -80,7 +82,7 @@ class JwtTokenUtilTest {
                 .setSubject("testuser")
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() - 1000)) // ya expirado
-                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .signWith(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
                 .compact();
 
         assertThrows(ExpiredJwtException.class, () -> {
